@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
+
 
 namespace BankingAdmin.Models
 {
@@ -18,6 +20,7 @@ namespace BankingAdmin.Models
         public string PostCode { get; set; }
         public string Phone { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<BillPay> BillPay { get; set; }
     }
 }

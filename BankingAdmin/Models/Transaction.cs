@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
+
 
 namespace BankingAdmin.Models
 {
@@ -13,7 +15,9 @@ namespace BankingAdmin.Models
         public decimal Amount { get; set; }
         public string Comment { get; set; }
 
+        [JsonIgnore]
         public virtual Account AccountNumberNavigation { get; set; }
+        [JsonIgnore]
         public virtual Account DestAccountNumberNavigation { get; set; }
     }
 }

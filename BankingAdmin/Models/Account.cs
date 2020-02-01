@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
+
 
 namespace BankingAdmin.Models
 {
@@ -18,9 +20,11 @@ namespace BankingAdmin.Models
         public int CustomerId { get; set; }
         public decimal Balance { get; set; }
 
+        [JsonIgnore]
         public virtual Customer Customer { get; set; }
         public virtual ICollection<BillPay> BillPay { get; set; }
         public virtual ICollection<Transaction> TransactionAccountNumberNavigation { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Transaction> TransactionDestAccountNumberNavigation { get; set; }
     }
 }

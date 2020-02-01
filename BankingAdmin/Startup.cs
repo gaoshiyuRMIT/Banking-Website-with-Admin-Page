@@ -9,6 +9,10 @@ using Microsoft.EntityFrameworkCore;
 
 
 using BankingAdmin.Data;
+using BankingAdmin.Models;
+using BankingAdmin.Models.Manager;
+using BankingAdmin.Models.Repository;
+using BankingAdmin.Models.Json;
 
 namespace BankingAdmin
 {
@@ -24,7 +28,11 @@ namespace BankingAdmin
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.IgnoreReadOnlyProperties = true;
+                options.JsonSerializerOptions.Converters.Add(new BankingDateTimeConverter());
+            });
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -35,7 +43,7 @@ namespace BankingAdmin
                 options.UseSqlServer(Configuration.GetConnectionString(nameof(BankingContext)));
                 options.UseLazyLoadingProxies();
             });
-
+            services.AddScoped<IAsyncRepository<Customer, int>, CustomerManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

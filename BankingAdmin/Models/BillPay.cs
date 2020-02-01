@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
+
 
 namespace BankingAdmin.Models
 {
@@ -14,6 +16,7 @@ namespace BankingAdmin.Models
         public int Period { get; set; }
         public string Comment { get; set; }
 
+        [JsonIgnore]
         public virtual Account AccountNumberNavigation { get; set; }
         public virtual Payee Payee { get; set; }
     }

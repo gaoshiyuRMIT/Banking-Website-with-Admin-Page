@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
+
 
 namespace BankingAdmin.Models
 {
@@ -21,6 +23,7 @@ namespace BankingAdmin.Models
         public string Tfn { get; set; }
 
         public virtual ICollection<Account> Account { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Login> Login { get; set; }
     }
 }

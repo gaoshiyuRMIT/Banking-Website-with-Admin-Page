@@ -10,6 +10,8 @@ using BankingAdmin.Models.Repository;
 
 
 namespace BankingAdmin.Models.Manager {
+    delegate Customer CustomerTransform(Customer c);
+
     public class CustomerManager : IAsyncRepository<Customer, int>
     {
         private readonly BankingContext _context;
@@ -21,22 +23,35 @@ namespace BankingAdmin.Models.Manager {
             _set = _context.Customer;
         }
 
+        private static Customer TrimCustomer(Customer c)
+        {
+            c.Login.Clear(); 
+            foreach (var a in c.Account)
+            {
+                a.TransactionAccountNumberNavigation.Clear();
+                a.TransactionDestAccountNumberNavigation.Clear();
+                a.BillPay.Clear();
+            }
+            return c;
+        }
+
         public async Task<Customer> GetAsync(int customerId)
         {
-            return await _set.FindAsync(customerId);
+            return TrimCustomer(await _set.FindAsync(customerId));
         }
 
         public async Task<IEnumerable<Customer>> GetManyAsync(Func<Customer, bool> predicate)
         {
             var customers = from customer in _set
                             where predicate(customer)
-                            select customer;
+                            select TrimCustomer(customer);
             return await customers.ToListAsync();
         }
 
         public async Task<IEnumerable<Customer>> GetAllAsync()
         {
-            return await _set.ToListAsync();
+            var customers = from customer in _set select TrimCustomer(customer);
+            return await customers.ToListAsync();
         }
 
         public async Task<int> UpdateAsync(int customerId, Customer customer)

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
+
 
 namespace BankingAdmin.Models
 {
@@ -10,6 +12,7 @@ namespace BankingAdmin.Models
         public string PasswordHash { get; set; }
         public int CustomerId { get; set; }
 
+        [JsonIgnore]
         public virtual Customer Customer { get; set; }
     }
 }
