@@ -1,0 +1,13 @@
+.DS_Store
+appsettings.json
+
+*.sln
+
+/bin
+/obj
+/.vs
+/.vscode
+
+/BankingAdmin/bin
+/BankingAdmin/obj
+/BankingAdmin/.vs
