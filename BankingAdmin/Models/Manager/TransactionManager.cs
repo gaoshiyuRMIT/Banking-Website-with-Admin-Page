@@ -52,11 +52,11 @@ namespace BankingAdmin.Models.Manager
                 predicates.Add(x => x.Amount <= query.AmountTo.Value);
             if (query.CommentContains != null)
                 predicates.Add(x => x.Comment.Contains(query.CommentContains));
-            return await GetManyAsync(predicates.ToArray());
+            return await GetManyAsync(predicates);
         }
         
         public async Task<IEnumerable<Transaction>> GetManyAsync(
-            Expression<Func<Transaction, bool>>[] predicateList)
+            IEnumerable<Expression<Func<Transaction, bool>>> predicateList)
         {
             IQueryable<Transaction> transactions = _set;
             foreach (var p in predicateList) 
