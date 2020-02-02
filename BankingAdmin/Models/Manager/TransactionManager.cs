@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 
 using BankingAdmin.Data;
-using BankingAdmin.Models;
 using BankingAdmin.Models.Repository;
 
 namespace BankingAdmin.Models.Manager
@@ -36,7 +35,7 @@ namespace BankingAdmin.Models.Manager
 
         public async Task<IEnumerable<Transaction>> GetManyByQueryAsync(TransactionQuery query)
         {
-            List<Func<Transaction, bool>> predicates = new List<Func<Transaction, bool>>();
+            List<Expression<Func<Transaction, bool>>> predicates = new List<Expression<Func<Transaction, bool>>>();
             if (query.TransactionId != null)
                 predicates.Add(x => x.TransactionId == query.TransactionId.Value);
             if (query.ModifyDateFrom != null)
@@ -57,19 +56,13 @@ namespace BankingAdmin.Models.Manager
         }
         
         public async Task<IEnumerable<Transaction>> GetManyAsync(
-            Func<Transaction, bool>[] predicateList)
+            Expression<Func<Transaction, bool>>[] predicateList)
         {
-            Func<Transaction, bool> f = t => {
-                foreach (var predicate in predicateList)
-                {
-                    if (!predicate(t))
-                        return false;
-                }
-                return true;
-            };
-            var transactions = from transaction in _set
-                                where f(transaction)
-                                select transaction;
+            IQueryable<Transaction> transactions = _set;
+            foreach (var p in predicateList) 
+            {
+                transactions = transactions.Where(p);
+            }
             return await transactions.ToListAsync();
         }
 

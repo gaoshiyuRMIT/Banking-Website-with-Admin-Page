@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 using BankingAdmin.Data;
-using BankingAdmin.Models;
 using BankingAdmin.Models.Repository;
 
 
