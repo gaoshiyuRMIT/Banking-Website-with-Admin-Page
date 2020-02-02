@@ -9,12 +9,26 @@ export interface CustomerData {
     state: string;
     postCode: string;
     phone: string;
-    Tfn: string;
+    tfn: string;
 }
 
 @Injectable()
 export class CustomerService {
   myAppUrl: string = "";
+
+  static TrimCustomerData(c: CustomerData): CustomerData
+  {
+    return {
+      customerId : c.customerId,
+      name : c.name,
+      address : c.address,
+      city : c.city,
+      state : c.state,
+      postCode : c.postCode,
+      phone : c.phone,
+      tfn : c.tfn
+    };
+  }
 
   constructor(private _http: HttpClient, @Inject("BASE_URL") baseUrl: string)
   {

@@ -20,6 +20,10 @@ export class FetchCustomerDetailComponent implements OnInit{
   }
 
   ngOnInit() {
+    this.refreshCustomer();
+  }
+
+  refreshCustomer() {
     this._customerService.getCustomerById(this.customerId).subscribe(data => this.customer = data,
       error => this.errorMessage = error);
   }
