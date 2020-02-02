@@ -25,7 +25,7 @@ export class EditCustomerDetailComponent implements OnInit {
       city: [""],
       postCode: ["", [Validators.maxLength(4), Validators.minLength(4)]],
       phone: ["", [Validators.required, Validators.maxLength(9), Validators.minLength(9)]],
-      tfn: [""],
+      tfn: ["", Validators.maxLength(11)],
     });
   }
 

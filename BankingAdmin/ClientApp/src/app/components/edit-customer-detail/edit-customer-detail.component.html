@@ -44,6 +44,7 @@
         <label class="control-label">Phone</label>
         <input class="form-control" type="text" formControlName="phone" />
         <div class="text-danger" *ngIf="phone.invalid && formDir.submitted">
+          <div *ngIf="phone.errors.required">This field is required.</div>
           <div *ngIf="phone.errors.maxLength && phone.errors.minLength">Must be 9-digit Australian phone number.</div>
         </div>
       </div>
