@@ -1,0 +1,71 @@
+<h1>Transaction History</h1>
+
+
+<table class="table" *ngIf="searchhistory">
+    <thead>
+        <tr>
+            <td>Customer ID</td>
+            <td>Account Type</td>
+            <td>Date</td>
+            <td>Amount</td>
+            
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let search of searchList">
+            <td>
+                <div class="col-md-4"> <input class="form-control" type="text" formControlName="CustomerId"> </div>
+                
+            </td>
+            <td>
+                <div class="col-md-4">
+                    <select class="form-control" data-val="true" formControlName="AccountType">
+                        <option value="">-- Select AccountType --</option>
+                        <option value="Saving">Saving</option>
+                        <option value="Checking">Checking</option>
+                    </select>
+                </div>
+                
+            </td>
+            
+            <td> <div class="col-md-4"> <input class="form-control" type="text" formControlName="Amount">
+                to <input class="form-control" type="text" formControlName="Amount"> </div></td>
+             
+        </tr>
+    </tbody>
+</table>
+
+<div class="form-group">
+    <button type="submit" class="btn btn-primary">Search</button>
+    <button (click)="cancel()" class="btn btn-light ml-3">Cancel</button>
+</div>
+
+<p *ngIf="!historyList"><em>Loading...</em></p>
+
+
+<table class="table" *ngIf="historyList">
+    <thead>
+        <tr>
+            <td>Transaction ID</td>
+            <td>Modify Date</td>
+            <td>Transaction Type</td>
+            <td>Account Number</td>
+            <td>Destination Account Number</td>
+            <td>Amount</td>
+            <td>Comment</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let history of historyList">
+            <td>{{history.TransactionId}}</td>
+            <td>{{history.ModifyDate}}</td>
+            <td>{{history.TransactionType}}</td>
+            <td>{{history.AccountNumber}}</td>
+            <td>{{history.DestAccountNumber}}</td>
+            <td>{{history.Amount}}</td>
+            <td>{{history.Comment}}</td>
+           
+        </tr>
+    </tbody>
+</table>
+
