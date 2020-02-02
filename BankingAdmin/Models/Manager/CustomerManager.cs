@@ -25,17 +25,19 @@ namespace BankingAdmin.Models.Manager {
 
         private static Customer TrimCustomer(Customer c)
         {
-            return new Customer
-            {
-                CustomerId = c.CustomerId,
-                Name = c.Name,
-                Address = c.Address,
-                City = c.City,
-                State = c.State,
-                PostCode = c.PostCode,
-                Phone = c.Phone,
-                Tfn = c.Tfn
-            };
+            if (c != null)
+                return new Customer
+                {
+                    CustomerId = c.CustomerId,
+                    Name = c.Name,
+                    Address = c.Address,
+                    City = c.City,
+                    State = c.State,
+                    PostCode = c.PostCode,
+                    Phone = c.Phone,
+                    Tfn = c.Tfn
+                };
+            return c;
         }
 
         public async Task<Customer> GetAsync(int customerId)
