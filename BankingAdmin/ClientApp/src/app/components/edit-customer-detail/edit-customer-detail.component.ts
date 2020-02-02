@@ -32,7 +32,7 @@ export class EditCustomerDetailComponent implements OnInit {
   ngOnInit() {
     this._customerService.getCustomerById(this.customerId).subscribe(
       data => {
-        this.customerForm.setValue(CustomerService.TrimCustomerData(data));
+        this.customerForm.setValue(this._customerService.TrimCustomerData(data));
         console.log(data);
       },
       error => {
