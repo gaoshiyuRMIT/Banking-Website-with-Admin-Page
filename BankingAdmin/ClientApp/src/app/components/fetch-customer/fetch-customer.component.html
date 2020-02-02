@@ -2,6 +2,21 @@
 
 <p *ngIf="!customerList"><em>Loading...</em></p>
 
+<form #formDir="ngForm" [formGroup]="customerIdForm" (ngSubmit)="search()">
+    <div class="form-group row">
+      <label class="col-form-label col-sm-auto">Customer ID</label>
+      <div class="col-sm-auto">
+        <input type="number" formControlName="customerId" class="form-control"/>
+      </div>
+      <div class="text-danger" *ngIf="customerId.invalid && formDir.submitted">
+        <div *ngIf="customerId.errors.max || customerId.errors.min">
+          Must be exactly 4 digits long.
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
 <table class="table" *ngIf="customerList">
   <thead>
     <tr>
