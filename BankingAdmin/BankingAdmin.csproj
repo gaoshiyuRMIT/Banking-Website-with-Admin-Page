@@ -29,6 +29,7 @@
     <Content Remove="$(SpaRoot)**" />
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+    <None Remove="ClientApp\src\app\transaction-history\transaction-history.component.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +37,10 @@
     <Folder Include="Models\Manager\" />
     <Folder Include="Data\" />
     <Folder Include="Models\Json\" />
+    <Folder Include="ClientApp\src\app\transaction-history\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\transaction-history\transaction-history.component.ts" />
   </ItemGroup>
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
