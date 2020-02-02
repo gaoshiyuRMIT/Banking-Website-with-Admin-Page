@@ -25,14 +25,17 @@ namespace BankingAdmin.Models.Manager {
 
         private static Customer TrimCustomer(Customer c)
         {
-            c.Login.Clear(); 
-            foreach (var a in c.Account)
+            return new Customer
             {
-                a.TransactionAccountNumberNavigation.Clear();
-                a.TransactionDestAccountNumberNavigation.Clear();
-                a.BillPay.Clear();
-            }
-            return c;
+                CustomerId = c.CustomerId,
+                Name = c.Name,
+                Address = c.Address,
+                City = c.City,
+                State = c.State,
+                PostCode = c.PostCode,
+                Phone = c.Phone,
+                Tfn = c.Tfn
+            };
         }
 
         public async Task<Customer> GetAsync(int customerId)
