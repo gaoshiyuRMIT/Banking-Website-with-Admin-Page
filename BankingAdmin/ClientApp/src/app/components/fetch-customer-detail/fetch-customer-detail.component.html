@@ -32,11 +32,12 @@
   </tr>
   <tr>
     <th>TFN</th>
-    <td>{{customer.Tfn}}</td>
+    <td>{{customer.tfn}}</td>
   </tr>
 
 </table>
 <div>
   <a [routerLink]="['/fetch-customer']">Back</a> |
-  <a [routerLink]="" (click)="delete()">Delete</a>
+  <a [routerLink]="" (click)="delete()">Delete</a> |
+  <a [routerLink]="['/edit-customer-detail', customerId]">Edit</a>
 </div>

@@ -1,0 +1,63 @@
+<h1>Edit</h1>
+<h4>Customer</h4>
+<div class="row">
+  <div class="col-md-12">
+    <form [formGroup]="customerForm" (ngSubmit)="save()" #formDir="ngForm">
+      <input hidden formControlName="customerId" />
+      <div class="form-group">
+        <label class="control-label">Name</label>
+        <input class="form-control" type="text" formControlName="name" />
+        <div class="text-danger" *ngIf="name.invalid && formDir.submitted">
+          <div *ngIf="name.errors.required">This field is required</div>
+          <div *ngIf="name.errors.maxLength">Maximum length exceeded</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Address</label>
+        <input class="form-control" type="text" formControlName="address" />
+        <div class="text-danger" *ngIf="address.invalid && formDir.submitted">
+          <div *ngIf="address.errors.maxLength">Maximum length exceeded</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">State</label>
+        <input class="form-control" type="text" formControlName="state" />
+        <div class="text-danger" *ngIf="state.invalid && formDir.submitted">
+          <div *ngIf="state.errors.maxLength">Maximum length exceeded</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">City</label>
+        <input class="form-control" type="text" formControlName="city" />
+        <div class="text-danger" *ngIf="city.invalid && formDir.submitted">
+          <div *ngIf="city.errors.maxLength">Maximum length exceeded</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Postcode</label>
+        <input class="form-control" type="text" formControlName="postCode" />
+        <div class="text-danger" *ngIf="postCode.invalid && formDir.submitted">
+          <div *ngIf="postCode.errors.maxLength && postCode.errors.minLength">Must be exactly 4 digits.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Phone</label>
+        <input class="form-control" type="text" formControlName="phone" />
+        <div class="text-danger" *ngIf="phone.invalid && formDir.submitted">
+          <div *ngIf="phone.errors.maxLength && phone.errors.minLength">Must be 9-digit Australian phone number.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">TFN</label>
+        <input class="form-control" type="text" formControlName="tfn" />
+        <div class="text-danger" *ngIf="tfn.invalid && formDir.submitted">
+          <div *ngIf="tfn.errors.maxLength">Maximum length 11.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a [routerLink]="['/fetch-customer-detail', customerId]" class="btn btn-light ml-3">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
