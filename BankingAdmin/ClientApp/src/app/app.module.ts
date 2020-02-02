@@ -10,13 +10,20 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 
+import {CustomerService} from './services/customer.service';
+import { FetchCustomerComponent } from './components/fetch-customer/fetch-customer.component';
+import {FetchCustomerDetailComponent} from './components/fetch-customer-detail/fetch-customer-detail.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
-    FetchDataComponent
+    FetchDataComponent,
+    FetchCustomerComponent,
+    FetchCustomerDetailComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -26,9 +33,11 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'fetch-customer', component: FetchCustomerComponent },
+      {path: 'fetch-customer-detail/:id', component: FetchCustomerDetailComponent},
     ])
   ],
-  providers: [],
+  providers: [CustomerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

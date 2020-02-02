@@ -1,0 +1,33 @@
+<h1>Customers</h1>
+
+<p *ngIf="!customerList"><em>Loading...</em></p>
+
+<table class="table" *ngIf="customerList">
+  <thead>
+    <tr>
+      <td>ID</td>
+      <td>Name</td>
+      <td>Address</td>
+      <td>State</td>
+      <td>City</td>
+      <td>Postcode</td>
+      <td>Phone</td>
+      <td>TFN</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let customer of customerList">
+      <td>{{customer.customerId}}</td>
+      <td>{{customer.name}}</td>
+      <td>{{customer.address}}</td>      
+      <td>{{customer.state}}</td>
+      <td>{{customer.city}}</td>
+      <td>{{customer.postCode}}</td>
+      <td>{{customer.phone}}</td>
+      <td>{{customer.Tfn}}</td>
+      <td>
+        <a [routerLink]="['/fetch-customer-detail/', customer.customerId]">Detail</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
