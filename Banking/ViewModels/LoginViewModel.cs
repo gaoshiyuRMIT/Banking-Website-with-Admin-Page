@@ -17,12 +17,19 @@ namespace Banking.ViewModels
         [Required, StringLength(20)]
         public string Password { get; set; }
 
+        private bool _authFailed = false;
+        public bool AuthFailed => _authFailed;
+
         public void Validate(ModelStateDictionary modelState)
         {
-            if (Login == null || !PBKDF2.Verify(Login.PasswordHash, Password))
+            if (Login?.IsLocked == true)
             {
-                modelState.AddModelError("LoginFailed", "Login failed, please try again.");
+                modelState.AddModelError("Login.UserID", "Account locked, please try later.");
+                return;
             }
+            _authFailed = !Login.Verify(Password);
+            if (Login == null || AuthFailed)
+                modelState.AddModelError("LoginFailed", "Login failed, please try again.");
         }
         public void Clear() {}
     }

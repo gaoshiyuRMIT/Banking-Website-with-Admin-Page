@@ -34,10 +34,16 @@ namespace Banking.Controllers
         public async Task<IActionResult> Index(LoginViewModel viewModel)
         {
             viewModel.Login = await LMgr.GetLoginAsync(viewModel.Login.UserID);
+            if (viewModel.Login.IsLocked)
+                await LMgr.UpdateLockAsync(viewModel.Login);
 
             viewModel.Validate(ModelState);
             if (!ModelState.IsValid)
+            {
+                if (viewModel.AuthFailed)
+                    await LMgr.IncrementAttemptsAsync(viewModel.Login);
                 return View(viewModel);
+            }
 
             CustomerSessionKey.SetToSession(viewModel.Login.Customer, HttpContext.Session);
 
