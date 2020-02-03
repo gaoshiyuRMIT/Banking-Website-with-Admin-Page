@@ -1,0 +1,30 @@
+@model BasicOpViewModel
+@{
+    ViewData["Title"] = "My Statements";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <h2 class="display-4">My Statements</h2>
+        
+        <form asp-action="Statements">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="AccountType" class="control-label"></label>
+                <select asp-for="AccountType" asp-items="Model.AccountTypes" class="form-control"></select>
+                <span asp-validation-for="AccountType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="View Statements" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to Customers</a>
+</div>
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
+
+

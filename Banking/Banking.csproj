@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
+    <PackageReference Include="SimpleHashing" Version="1.0.3.1" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="7.9.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="Views\Login\" />
+    <Folder Include="Views\Customer\" />
+     <Folder Include="Migrations\" />
+
+     <Folder Include="wwwroot\img\" />
+     <Folder Include="ViewModels\" />
+     <Folder Include="Attributes\" />
+     <Folder Include="Extensions\" />
+     <Folder Include="Views\BillPay\" />
+     <Folder Include="Views\Payee\" />
+     <Folder Include="Services\" />
+     <Folder Include="Managers\" />
+  </ItemGroup>
+</Project>

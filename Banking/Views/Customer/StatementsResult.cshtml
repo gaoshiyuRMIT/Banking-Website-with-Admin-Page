@@ -1,0 +1,54 @@
+﻿@model StatementsResultViewModel
+
+@{
+    ViewData["Title"] = "My Statements";
+}
+<div class="row">
+    <div class="col-md-4">
+        <h2 class="display-4">My Statements</h2>
+        <h4>Balance: @Model.Account.Balance</h4>
+    </div>
+</div>
+<table class="table">
+
+    <tr>
+        <th>@Html.DisplayNameFor(x => x.Transactions[0].TransactionID)</th>
+        <th>@Html.DisplayNameFor(x => x.Transactions[0].TransactionType)</th>
+        <th>@Html.DisplayNameFor(x => x.Transactions[0].Amount)</th>
+        <th>@Html.DisplayNameFor(x => x.Transactions[0].ModifyDate)</th>
+        <th>@Html.DisplayNameFor(x => x.Transactions[0].AccountNumber)</th>
+        <th>@Html.DisplayNameFor(x => x.Transactions[0].DestAccountNumber)</th>
+        <th>@Html.DisplayNameFor(x => x.Transactions[0].Comment)</th>
+    </tr>
+
+    @foreach (var item in Model.Transactions)
+    {
+        <tr>
+            <td>@Html.DisplayFor(x => item.TransactionID)</td>
+
+            <td>@Html.DisplayFor(x => item.TransactionType)</td>
+
+            <td>@Html.DisplayFor(x => item.Amount)</td>
+
+            <td>@Html.DisplayFor(x => item.ModifyDateLocal)</td>
+
+            <td>@Html.DisplayFor(x => item.AccountNumber)</td>
+
+            <td>@Html.DisplayFor(x => item.DestAccountNumber)</td>
+
+            <td>@Html.DisplayFor(x => item.Comment)</td>
+        </tr>
+    }
+</table>
+
+@Html.PagedListPager(Model.Transactions, page => Url.Action("StatementsResult", new { page }),
+    new PagedListRenderOptions
+    {
+        LiElementClasses = new[] { "page-item" },
+        PageClasses = new[] { "page-link" }
+    })
+
+<div>
+    <a asp-action="Statements">Change Account</a>
+</div>
+

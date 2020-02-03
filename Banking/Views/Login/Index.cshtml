@@ -1,0 +1,39 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Start";
+}
+<div>
+    <h1 class="display-4">National Wealth Bank of Australasia</h1>
+
+    <div class="text-center">
+        <img src="~/img/bank.jpg" alt="bank" />
+    </div>
+</div>
+<hr />
+<h2 class="display-4">Login</h2>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Login">
+            <input hidden asp-for="Login.PasswordHash" />
+            <span asp-validation-for="Login.PasswordHash" class="text-danger"></span>
+
+            <div class="form-group">
+                <label asp-for="Login.UserID" class="control-label"></label>
+                <input asp-for="Login.UserID" class="form-control" />
+                <span asp-validation-for="Login.UserID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label">Password</label>
+                <input asp-for="Password" type="password" class="form-control" />
+                @Html.ValidationMessage("Password", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login" asp-controller="Login" asp-action="Index" class="btn btn-primary" />
+            </div>
+            @Html.ValidationMessage("LoginFailed", new { @class = "text-danger" })
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

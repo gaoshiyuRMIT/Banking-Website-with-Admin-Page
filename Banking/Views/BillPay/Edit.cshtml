@@ -1,0 +1,86 @@
+﻿@model BillPayEditViewModel
+
+@{
+    ViewData["Title"] = "Edit Bill Pay";
+}
+
+
+        <div class="row">
+            <div class="col-md-4">
+                <div>
+                    <h2 class="display-4">Bill Pay</h2>
+
+                    <h4>Edit</h4>
+                </div>
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="AccountType" class="control-label"></label>
+                        <select asp-for="AccountType" asp-items="Model.AccountTypes" class="form-control"></select>
+                        <span asp-validation-for="AccountType" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Payee</label>
+                        @if (Model.Payee != null)
+                        {
+                            <div class="p-2">
+                                <input hidden asp-for="Payee.PayeeID" class="form-control" />
+                                <label asp-for="Payee.Name" class="control-label"></label>
+                                <input readonly asp-for="Payee.Name" class="form-control" />
+                                <label asp-for="Payee.Address" class="control-label"></label>
+                                <input readonly asp-for="Payee.Address" class="form-control" />
+                                <label asp-for="Payee.City" class="control-label"></label>
+                                <input readonly asp-for="Payee.City" class="form-control" />
+                                <label asp-for="Payee.State" class="control-label"></label>
+                                <input readonly asp-for="Payee.State" class="form-control" />
+                                <label asp-for="Payee.PostCode" class="control-label"></label>
+                                <input readonly asp-for="Payee.PostCode" class="form-control" />
+                                <label asp-for="Payee.Phone" class="control-label"></label>
+                                <input readonly asp-for="Payee.Phone" class="form-control" />
+                            </div>
+                        }
+                        <div class="list-group">
+                            <input type="submit" asp-action="EditOrCreateToPayeeCreate" value="Add a New Payee" class="list-group-item list-group-item-action" />
+                            <input type="submit" asp-action="EditOrCreateToPayee" value="Choose From History" class="list-group-item list-group-item-action" />
+                        </div>
+                        <span asp-validation-for="Payee" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Amount" class="control-label"></label>
+                        <input asp-for="Amount" class="form-control" />
+                        <span asp-validation-for="Amount" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ScheduleDateLocal" class="control-label"></label>
+                        <input asp-for="ScheduleDateLocal" class="form-control" />
+                        <span asp-validation-for="ScheduleDateLocal" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Period" class="control-label"></label>
+                        <select asp-for="Period" asp-items="Model.PeriodSelect" class="form-control"></select>
+                        <span asp-validation-for="Period" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Comment" class="control-label"></label>
+                        <input asp-for="Comment" class="form-control" />
+                        <span asp-validation-for="Comment" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" asp-action="Edit" value="Submit" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    
+<div>
+    <a asp-action="Index">Back and Save</a> |
+    <a asp-action="Index" asp-route-discard="1">Abort</a>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
+

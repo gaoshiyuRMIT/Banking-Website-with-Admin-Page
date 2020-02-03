@@ -1,0 +1,42 @@
+﻿@model Customer
+
+@{
+    ViewData["Title"] = "Accounts";
+}
+    <div class="col-md-4">
+        <div>
+            <h2 class="display-4">Accounts</h2>
+                @foreach (var Account in Model.Accounts)
+                {
+                    <div class="row p-3">
+
+                        <table class="table">
+
+                            <tr>
+                                <th>@Html.DisplayNameFor(x => Account.AccountNumber) </th>
+                                <td>@Html.DisplayFor(x => Account.AccountNumber)</td>
+                            </tr>
+                            <tr>
+                                <th>@Html.DisplayNameFor(x => Account.AccountType)</th>
+                                <td>@Html.DisplayFor(x => Account.AccountType)</td>
+                            </tr>
+                            <tr>
+                                <th>@Html.DisplayNameFor(x => Account.Balance)</th>
+                                <td>@Html.DisplayFor(x => Account.Balance)</td>
+                            </tr>
+                            <tr>
+                                <th>@Html.DisplayNameFor(x => Account.ModifyDate)</th>
+                                <td>@Html.DisplayFor(x => Account.ModifyDateLocal)</td>
+                            </tr>
+
+                        </table>
+                    </div>
+                }
+
+        </div>
+
+    </div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
