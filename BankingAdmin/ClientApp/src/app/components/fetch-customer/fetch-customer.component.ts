@@ -27,7 +27,6 @@ export class FetchCustomerComponent {
     if (this.customerId.value !== null)
       this._customerService.getCustomerById(this.customerId.value).subscribe(
         data => {
-          console.log(data);
           this.customerList = data !== null ? [data] : [];
         },
         error => console.error(error));

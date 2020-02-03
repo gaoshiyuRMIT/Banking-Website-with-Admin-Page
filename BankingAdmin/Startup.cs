@@ -44,6 +44,7 @@ namespace BankingAdmin
                 options.UseLazyLoadingProxies();
             });
             services.AddScoped<IAsyncRepository<Customer, int>, CustomerManager>();
+            services.AddScoped<IAsyncSearchRepository<Transaction, TransactionQuery>, TransactionManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
