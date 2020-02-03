@@ -1,0 +1,42 @@
+﻿@model IEnumerable<BillPay>
+
+@{
+    ViewData["Title"] = "Bill Pay";
+}
+    
+            <div>
+                <h2 class="display-4">Scheduled Bill Pays</h2>
+
+
+                <div class="p-2">
+                    <a asp-action="Create" class="btn btn-secondary">Schedule a New Bill Pay</a>
+                </div>
+            </div>
+            <table class="table">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.AccountNumber)</th>
+                    <th>@Html.DisplayNameFor(model => model.PayeeID)</th>
+                    <th>@Html.DisplayNameFor(model => model.Amount)</th>
+                    <th>@Html.DisplayNameFor(model => model.ScheduleDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.Period)</th>
+                    <th>@Html.DisplayNameFor(model => model.Comment)</th>
+
+                </tr>
+                @foreach (var item in @Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(x => item.AccountNumber)</td>
+                        <td>@Html.DisplayFor(x => item.PayeeID)</td>
+                        <td>@Html.DisplayFor(x => item.Amount)</td>
+                        <td>@Html.DisplayFor(x => item.ScheduleDateLocal)</td>
+                        <td>@Html.DisplayFor(x => item.Period)</td>
+                        <td>@Html.DisplayFor(x => item.Comment)</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-BillPayID=@item.BillPayID class="btn btn-primary">Modify</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+<div>
+    <a asp-action="Index" asp-controller="Customer">Back</a>
+</div>

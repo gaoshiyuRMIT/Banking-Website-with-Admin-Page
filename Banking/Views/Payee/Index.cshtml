@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Payee>
+@{
+    ViewData["Title"] = "Choose a Payee";
+}
+
+<h1>Payees</h1>
+<h4>Choose From History</h4>
+<hr />
+<form asp-action="Index" method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(x => x.PayeeID)</th>
+                <th>@Html.DisplayNameFor(x => x.Name)</th>
+                <th>@Html.DisplayNameFor(x => x.Address)</th>
+                <th>@Html.DisplayNameFor(x => x.City)</th>
+                <th>@Html.DisplayNameFor(x => x.State)</th>
+                <th>@Html.DisplayNameFor(x => x.PostCode)</th>
+                <th>@Html.DisplayNameFor(x => x.Phone)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in @Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(x => item.PayeeIDStr)</td>
+                    <td>@Html.DisplayFor(x => item.Name)</td>
+                    <td>@Html.DisplayFor(x => item.Address)</td>
+                    <td>@Html.DisplayFor(x => item.City)</td>
+                    <td>@Html.DisplayFor(x => item.State)</td>
+                    <td>@Html.DisplayFor(x => item.PostCode)</td>
+                    <td>@Html.DisplayFor(x => item.Phone)</td>
+                    <td>
+                        <input type="radio" name="PayeeID" value=@item.PayeeID class="form-control"/>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+    <p>
+        <input type="submit" class="btn btn-primary"/>
+    </p>
+</form>
+<div>
+    <a asp-action="Cancel">Cancel</a>
+</div>

@@ -1,0 +1,73 @@
+﻿@model Customer
+
+@{
+
+    ViewData["Title"] = "Profile";
+}
+<div class="row">
+    <div class="col-md-4">
+        <div>
+            <h2 class="display-4">Profile</h2>
+
+            <form asp-action="Profile">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group"></div>
+            </form>
+            <div>
+                <label asp-for="CustomerID" class="control-label"></label>
+
+                <span>
+                    @Model.CustomerID
+                </span>
+            </div>
+        </div>
+        <table class="table">
+
+            <tr>
+                <th>@Html.DisplayNameFor(x => x.Name) </th>
+                <td>@Html.DisplayFor(x => x.Name)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(x => x.Address)</th>
+                <td>@Html.DisplayFor(x => x.Address)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(x => x.City)</th>
+                <td>@Html.DisplayFor(x => x.City)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(x => x.State)</th>
+                <td>@Html.DisplayFor(x => x.State)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(x => x.PostCode)</th>
+                <td>@Html.DisplayFor(x => x.PostCode)</td>
+            </tr>
+
+            <tr>
+                <th>@Html.DisplayNameFor(x => x.Phone)</th>
+                <td>@Html.DisplayFor(x => x.Phone)</td>
+
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(x => x.TFN)</th>
+                <td>@Html.DisplayFor(x => x.TFN)</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>********</td>
+            </tr>
+
+        </table>
+        <a class="btn btn-primary" asp-action="ProfileEdit">Edit</a>
+
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back</a>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
