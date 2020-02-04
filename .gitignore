@@ -14,3 +14,6 @@ appsettings.json
 /BankingAdmin/bin
 /BankingAdmin/obj
 /BankingAdmin/.vs
+/BankingLib/bin
+/BankingLib/obj
+/BankingLib/.vs
