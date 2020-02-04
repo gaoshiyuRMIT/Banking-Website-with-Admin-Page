@@ -56,6 +56,7 @@ namespace Banking.Services
                             .GetRequiredService<DbContextOptions<BankingContext>>());
                     var now = DateTime.UtcNow;
                     var billPaysQ = context.BillPay.Where(x =>
+                        x.Status != BillPayStatus.Blocked &&
                         x.ScheduleDate > now - interval && x.ScheduleDate <= now);
                     var billPays = await billPaysQ.ToListAsync();
                     foreach (var billPay in billPays)
