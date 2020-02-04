@@ -32,7 +32,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let customer of customerList">
-      <td>{{customer.customerId}}</td>
+      <td>{{customer.customerID}}</td>
       <td>{{customer.name}}</td>
       <td>{{customer.address}}</td>      
       <td>{{customer.state}}</td>
@@ -41,7 +41,7 @@
       <td>{{customer.phone}}</td>
       <td>{{customer.tfn}}</td>
       <td>
-        <a [routerLink]="['/fetch-customer-detail/', customer.customerId]">Detail</a>
+        <a [routerLink]="['/fetch-customer-detail/', customer.customerID]">Detail</a>
       </td>
     </tr>
   </tbody>

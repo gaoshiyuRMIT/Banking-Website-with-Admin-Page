@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-md-12">
     <form [formGroup]="customerForm" (ngSubmit)="save()" #formDir="ngForm">
-      <input hidden formControlName="customerId" />
+      <input hidden formControlName="customerID" />
       <div class="form-group">
         <label class="control-label">Name</label>
         <input class="form-control" type="text" formControlName="name" />

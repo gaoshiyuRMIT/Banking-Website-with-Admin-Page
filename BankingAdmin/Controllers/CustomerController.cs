@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-using BankingAdmin.Models;
+using BankingLib.Models;
 using BankingAdmin.Models.Repository;
 
 namespace BankingAdmin.Controllers

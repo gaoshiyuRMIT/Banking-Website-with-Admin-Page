@@ -29,9 +29,9 @@ export class FetchCustomerDetailComponent implements OnInit{
   }
 
   delete() {
-    const ans = confirm(`Are you sure you want to delete customer with ID: ${ this.customer.customerId }?`);
+    const ans = confirm(`Are you sure you want to delete customer with ID: ${ this.customer.customerID }?`);
     if (ans) {
-      this._customerService.deleteCustomer(this.customer.customerId).subscribe(data => {
+      this._customerService.deleteCustomer(this.customer.customerID).subscribe(data => {
         this._router.navigate(["/fetch-customer"]);
       })
     }

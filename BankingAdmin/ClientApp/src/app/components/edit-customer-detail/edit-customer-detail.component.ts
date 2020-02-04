@@ -18,7 +18,7 @@ export class EditCustomerDetailComponent implements OnInit {
     if (_avRoute.snapshot.params["id"])
       this.customerId = _avRoute.snapshot.params["id"];
     this.customerForm = _formBuilder.group({
-      customerId: [null, Validators.required],
+      customerID: [null, Validators.required],
       name: ["", Validators.required],
       address: [""],
       state: [""],
@@ -33,7 +33,6 @@ export class EditCustomerDetailComponent implements OnInit {
     this._customerService.getCustomerById(this.customerId).subscribe(
       data => {
         this.customerForm.setValue(this._customerService.TrimCustomerData(data));
-        console.log(data);
       },
       error => {
         this.errorMessage = error;  

@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
-using BankingAdmin.Data;
+using BankingLib.Data;
+using BankingLib.Models;
 using BankingAdmin.Models.Repository;
 
 
@@ -27,14 +28,14 @@ namespace BankingAdmin.Models.Manager {
             if (c != null)
                 return new Customer
                 {
-                    CustomerId = c.CustomerId,
+                    CustomerID = c.CustomerID,
                     Name = c.Name,
                     Address = c.Address,
                     City = c.City,
                     State = c.State,
                     PostCode = c.PostCode,
                     Phone = c.Phone,
-                    Tfn = c.Tfn
+                    TFN = c.TFN
                 };
             return c;
         }
@@ -60,7 +61,7 @@ namespace BankingAdmin.Models.Manager {
 
         public async Task<int> UpdateAsync(int customerId, Customer customer)
         {
-            customer.CustomerId = customerId;
+            customer.CustomerID = customerId;
             _set.Update(customer);
             await _context.SaveChangesAsync();
             return customerId;
@@ -78,7 +79,7 @@ namespace BankingAdmin.Models.Manager {
         {
             await _set.AddAsync(customer);
             await _context.SaveChangesAsync();
-            return customer.CustomerId;
+            return customer.CustomerID;
         }
     }
 }

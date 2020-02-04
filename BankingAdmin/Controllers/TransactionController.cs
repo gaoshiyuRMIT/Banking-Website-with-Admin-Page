@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using BankingAdmin.Models.Manager;
 using BankingAdmin.Models.Repository;
-using BankingAdmin.Models;
+using BankingLib.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
