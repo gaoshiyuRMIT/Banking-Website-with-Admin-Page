@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using SimpleHashing;
 
 using BankingLib.Models;
-using Banking.Data;
+using BankingLib.Data;
 
 
 namespace Banking.Managers

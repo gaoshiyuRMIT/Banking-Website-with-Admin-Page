@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 using BankingLib.Models;
 
-namespace Banking.Data
+namespace BankingLib.Data
 {
     public class BankingContext : DbContext
     {

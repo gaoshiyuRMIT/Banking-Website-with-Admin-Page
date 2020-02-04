@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 
 using Banking.Data;
+using BankingLib.Data;
 using Banking.Managers;
 
 namespace Banking

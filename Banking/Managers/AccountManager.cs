@@ -5,7 +5,7 @@ using System.Threading;
 using Microsoft.EntityFrameworkCore;
 using X.PagedList;
 using BankingLib.Models;
-using Banking.Data;
+using BankingLib.Data;
 
 namespace Banking.Managers
 {
