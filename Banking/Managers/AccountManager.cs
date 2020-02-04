@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using System.Threading;
 using Microsoft.EntityFrameworkCore;
 using X.PagedList;
-using Banking.Models;
-using Banking.Data;
+using BankingLib.Models;
+using BankingLib.Data;
 
 namespace Banking.Managers
 {

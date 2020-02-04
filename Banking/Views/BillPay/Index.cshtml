@@ -14,23 +14,26 @@
             </div>
             <table class="table">
                 <tr>
+                    <th>@Html.DisplayNameFor(model => model.BillPayID)</th>
                     <th>@Html.DisplayNameFor(model => model.AccountNumber)</th>
                     <th>@Html.DisplayNameFor(model => model.PayeeID)</th>
                     <th>@Html.DisplayNameFor(model => model.Amount)</th>
                     <th>@Html.DisplayNameFor(model => model.ScheduleDate)</th>
                     <th>@Html.DisplayNameFor(model => model.Period)</th>
                     <th>@Html.DisplayNameFor(model => model.Comment)</th>
-
+                    <th>@Html.DisplayNameFor(model => model.StatusDesc)</th>
                 </tr>
                 @foreach (var item in @Model)
                 {
                     <tr>
+                        <th>@Html.DisplayFor(x => item.BillPayID)</th>
                         <td>@Html.DisplayFor(x => item.AccountNumber)</td>
                         <td>@Html.DisplayFor(x => item.PayeeID)</td>
                         <td>@Html.DisplayFor(x => item.Amount)</td>
                         <td>@Html.DisplayFor(x => item.ScheduleDateLocal)</td>
                         <td>@Html.DisplayFor(x => item.Period)</td>
                         <td>@Html.DisplayFor(x => item.Comment)</td>
+                        <td>@Html.DisplayFor(x => item.StatusDesc)</td>
                         <td>
                             <a asp-action="Edit" asp-route-BillPayID=@item.BillPayID class="btn btn-primary">Modify</a>
                         </td>

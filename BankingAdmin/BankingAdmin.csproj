@@ -34,8 +34,12 @@
   <ItemGroup>
     <Folder Include="Models\Repository\" />
     <Folder Include="Models\Manager\" />
-    <Folder Include="Data\" />
     <Folder Include="Models\Json\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BankingLib\BankingLib.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->

@@ -2,7 +2,7 @@ import { Injectable, Inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
 export interface CustomerData {
-    customerId: number;
+    customerID: number;
     name: string;
     address: string;
     city: string;
@@ -24,7 +24,7 @@ export class CustomerService {
   TrimCustomerData(c: CustomerData): CustomerData
   {
     return {
-      customerId : c.customerId,
+      customerID: c.customerID,
       name : c.name,
       address : c.address,
       city : c.city,

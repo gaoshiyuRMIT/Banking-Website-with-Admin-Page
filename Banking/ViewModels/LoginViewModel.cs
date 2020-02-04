@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using SimpleHashing;
 
 
-using Banking.Models;
+using BankingLib.Models;
 
 namespace Banking.ViewModels
 {

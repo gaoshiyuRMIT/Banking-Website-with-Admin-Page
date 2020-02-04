@@ -8,8 +8,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 
 
-using BankingAdmin.Data;
-using BankingAdmin.Models;
+using BankingLib.Data;
+using BankingLib.Models;
 using BankingAdmin.Models.Manager;
 using BankingAdmin.Models.Repository;
 using BankingAdmin.Models.Json;

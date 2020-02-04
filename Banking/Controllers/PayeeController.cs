@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 using Banking.Attributes;
 using Banking.Data;
+using BankingLib.Models;
 using Banking.Models;
 using Banking.ViewModels;
 using Banking.Managers;

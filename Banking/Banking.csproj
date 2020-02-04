@@ -32,5 +32,11 @@
      <Folder Include="Views\Payee\" />
      <Folder Include="Services\" />
      <Folder Include="Managers\" />
+     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BankingLib\BankingLib.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 </Project>

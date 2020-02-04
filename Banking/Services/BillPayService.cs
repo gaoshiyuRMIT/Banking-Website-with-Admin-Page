@@ -9,8 +9,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 
-using Banking.Models;
-using Banking.Data;
+using BankingLib.Models;
+using BankingLib.Data;
 
 namespace Banking.Services
 {
@@ -56,6 +56,7 @@ namespace Banking.Services
                             .GetRequiredService<DbContextOptions<BankingContext>>());
                     var now = DateTime.UtcNow;
                     var billPaysQ = context.BillPay.Where(x =>
+                        x.Status != BillPayStatus.Blocked &&
                         x.ScheduleDate > now - interval && x.ScheduleDate <= now);
                     var billPays = await billPaysQ.ToListAsync();
                     foreach (var billPay in billPays)
@@ -67,14 +68,14 @@ namespace Banking.Services
                             _logger.LogInformation($"Executed BillPay {billPay.BillPayID}");
                         }
                         else
-                        {
+                        {                            
+                            await context.SaveChangesAsync();
                             _logger.LogError($"BillPay {billPay.BillPayID}({billPay.ScheduleDateLocal}) execution failed. {errMsg}");
                         }
                     }
                 }
             } catch (Exception e)
             {
-                DateTime now = DateTime.Now;
                 _logger.LogError(0, e, "An exception occured when executing bill pays");
             }
         }

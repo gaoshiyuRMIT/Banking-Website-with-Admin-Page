@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+using BankingLib.Data;
+
 namespace Banking.Migrations
 {
     [DbContext(typeof(BankingContext))]
@@ -71,6 +73,12 @@ namespace Banking.Migrations
                         .HasMaxLength(1);
 
                     b.Property<DateTime>("ScheduleDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StatusModifyDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("BillPayID");
