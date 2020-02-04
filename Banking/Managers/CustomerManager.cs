@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using Microsoft.EntityFrameworkCore;
 using X.PagedList;
-using Banking.Models;
+using BankingLib.Models;
 using Banking.Data;
 
 

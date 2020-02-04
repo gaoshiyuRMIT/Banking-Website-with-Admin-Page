@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using SimpleHashing;
 
-namespace Banking.Models
+namespace BankingLib.Models
 {
     public class Login : AModifyDate
     {

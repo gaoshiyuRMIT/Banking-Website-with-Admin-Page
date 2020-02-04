@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-using Banking.Attributes;
+using BankingLib.Attributes;
 
-namespace Banking.Models
+namespace BankingLib.Models
 {
     public abstract class APerson
     {

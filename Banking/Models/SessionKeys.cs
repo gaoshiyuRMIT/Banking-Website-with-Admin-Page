@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 using Banking.ViewModels;
+using BankingLib.Models;
 
 namespace Banking.Models
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-namespace Banking.Models
+namespace BankingLib.Models
 
 {
     public abstract class AModifyDate

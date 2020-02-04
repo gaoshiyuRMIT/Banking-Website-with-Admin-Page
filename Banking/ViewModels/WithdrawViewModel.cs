@@ -2,8 +2,8 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-using Banking.Models;
-using Banking.Extensions;
+using BankingLib.Models;
+using BankingLib.Extensions;
 
 namespace Banking.ViewModels
 {

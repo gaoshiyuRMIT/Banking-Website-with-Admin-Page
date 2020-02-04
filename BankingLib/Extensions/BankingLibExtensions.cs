@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-using Banking.Models;
+using BankingLib.Models;
 
-namespace Banking.Extensions
+namespace BankingLib.Extensions
 {
     public static class DateTimeExtensions
     {

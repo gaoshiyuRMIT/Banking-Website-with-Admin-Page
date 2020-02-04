@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 using System.Collections.Generic;
 
-using Banking.Models;
+using BankingLib.Models;
 
 namespace Banking.ViewModels
 {

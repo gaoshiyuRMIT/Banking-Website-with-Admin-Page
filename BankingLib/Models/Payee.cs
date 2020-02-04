@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
-namespace Banking.Models
+namespace BankingLib.Models
 {
     public class Payee : APerson
     {

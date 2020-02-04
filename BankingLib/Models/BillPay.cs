@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-using Banking.Extensions;
+using BankingLib.Extensions;
 
-namespace Banking.Models
+namespace BankingLib.Models
 {
     public enum BillPayPeriod
     {

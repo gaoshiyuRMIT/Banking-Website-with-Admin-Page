@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 
-using Banking.Models;
+using BankingLib.Models;
 
 namespace Banking.Data
 {

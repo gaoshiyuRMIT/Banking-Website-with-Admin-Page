@@ -5,7 +5,7 @@ using System.Threading;
 using Microsoft.EntityFrameworkCore;
 using SimpleHashing;
 
-using Banking.Models;
+using BankingLib.Models;
 using Banking.Data;
 
 

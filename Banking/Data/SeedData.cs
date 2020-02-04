@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 
-using Banking.Models;
+using BankingLib.Models;
 
 namespace Banking.Data
 {

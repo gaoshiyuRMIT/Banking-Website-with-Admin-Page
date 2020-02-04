@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using Microsoft.EntityFrameworkCore;
 
-using Banking.Models;
+using BankingLib.Models;
 using Banking.Data;
 
 

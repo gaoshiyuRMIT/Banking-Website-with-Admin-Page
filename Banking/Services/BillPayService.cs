@@ -9,7 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 
-using Banking.Models;
+using BankingLib.Models;
 using Banking.Data;
 
 namespace Banking.Services

@@ -1,7 +1,7 @@
 ﻿using System;
 using X.PagedList;
 
-using Banking.Models;
+using BankingLib.Models;
 
 namespace Banking.ViewModels
 {
