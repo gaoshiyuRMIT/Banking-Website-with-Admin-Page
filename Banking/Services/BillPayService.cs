@@ -67,14 +67,14 @@ namespace Banking.Services
                             _logger.LogInformation($"Executed BillPay {billPay.BillPayID}");
                         }
                         else
-                        {
+                        {                            
+                            await context.SaveChangesAsync();
                             _logger.LogError($"BillPay {billPay.BillPayID}({billPay.ScheduleDateLocal}) execution failed. {errMsg}");
                         }
                     }
                 }
             } catch (Exception e)
             {
-                DateTime now = DateTime.Now;
                 _logger.LogError(0, e, "An exception occured when executing bill pays");
             }
         }

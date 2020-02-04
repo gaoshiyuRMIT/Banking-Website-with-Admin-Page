@@ -14,6 +14,14 @@ namespace Banking.Models
         Annually = 3
     };
 
+    public enum BillPayStatus
+    {
+        Pending = 0,
+        Succeeded = 1,
+        Failed = 2,
+        Blocked = 3
+    }
+
     public class BillPay : AModifyDate
     {
 
@@ -52,9 +60,29 @@ namespace Banking.Models
         public string Comment { get; set; }
 
         [Display(Name = "Schedule Date Local")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
         public DateTime ScheduleDateLocal => ScheduleDate.ToLocalTime();
+        public BillPayStatus Status {get;set;}
         
+        private DateTime _statusModifyDate = DateTime.UtcNow;
+        public DateTime StatusModifyDate 
+        {
+            get => _statusModifyDate; 
+            set => _statusModifyDate = value;
+        }
+        
+        public DateTime StatusModifyDateLocal => StatusModifyDate.ToLocalTime();
+
+        [Display(Name = "Status")]
+        public string StatusDesc 
+        {
+            get 
+            {
+                if (Status == BillPayStatus.Pending)
+                    return "Pending";
+                return $"Execution {Status} at {StatusModifyDateLocal:dd/MM/yyyy HH:mm}";
+            }
+        }
         public DateTime? NextDateTime
         {
             get
@@ -67,33 +95,70 @@ namespace Banking.Models
                 DateTime _scheduleDate = ScheduleDate;
                 while (_scheduleDate <= DateTime.UtcNow)
                 {
-                    _scheduleDate.AddMonths(nMonth);
+                    _scheduleDate = _scheduleDate.AddMonths(nMonth);
                 }
                 return _scheduleDate;
             }
         }
 
+        private void UpdateScheduleDate()
+        {
+            if (Period != BillPayPeriod.OnceOff)
+                ScheduleDate = NextDateTime.Value;
+        }
+
+        public void Succeed()
+        {
+            Status = BillPayStatus.Succeeded;
+            StatusModifyDate = DateTime.UtcNow;
+            UpdateScheduleDate();
+        }
+
+        public void Fail()
+        {
+            Status = BillPayStatus.Failed;
+            StatusModifyDate = DateTime.UtcNow;
+            UpdateScheduleDate();
+        }
+
+        public void Block()
+        {
+            Status = BillPayStatus.Blocked;
+            StatusModifyDate = DateTime.UtcNow;
+        }
+
+        public void Unblock()
+        {
+            Status = BillPayStatus.Pending;
+            StatusModifyDate = DateTime.UtcNow;
+            UpdateScheduleDate();
+        }
+
         public bool ExecuteBillPay(out string errMsg)
         {
             errMsg = string.Empty;
-            if (Account.Balance - Amount < Account.MinBalance)
+            try
             {
-                errMsg = "The amount after deduction would be lower than the minimum allowed.";
-                if (Period != BillPayPeriod.OnceOff)
-                    ScheduleDate = NextDateTime.Value;
+                if (Account.Balance - Amount < Account.MinBalance)
+                {
+                    throw new Exception("The amount after deduction would be lower than the minimum allowed.");
+                }
+                Account.Balance -= Amount;
+                Account.Transactions.Add(new Transaction
+                {
+                    TransactionType = TransactionType.BillPay,
+                    Amount = Amount,
+                    ModifyDate = DateTime.UtcNow
+                });
+                Succeed();
+                return true;
+            }
+            catch (Exception e)
+            {
+                errMsg = e.Message;
+                Fail();
                 return false;
             }
-            Account.Balance -= Amount;
-            Account.Transactions.Add(new Transaction
-            {
-                TransactionType = TransactionType.BillPay,
-                Amount = Amount,
-                ModifyDate = DateTime.UtcNow
-            });
-            // update schedule date
-            if (Period != BillPayPeriod.OnceOff)
-                ScheduleDate = NextDateTime.Value;
-            return true;
         }
     }
 

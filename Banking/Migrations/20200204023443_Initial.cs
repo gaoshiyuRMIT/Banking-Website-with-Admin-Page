@@ -71,6 +71,8 @@ namespace Banking.Migrations
                     UserID = table.Column<string>(maxLength: 8, nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: false),
                     PasswordHash = table.Column<string>(maxLength: 64, nullable: false),
+                    Attempts = table.Column<int>(nullable: false),
+                    LockDateTime = table.Column<DateTime>(nullable: true),
                     CustomerID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -90,13 +92,15 @@ namespace Banking.Migrations
                 {
                     BillPayID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ModifyDate = table.Column<DateTime>(nullable: false),
                     AccountNumber = table.Column<int>(nullable: false),
                     PayeeID = table.Column<int>(nullable: false),
                     Amount = table.Column<decimal>(nullable: false),
                     ScheduleDate = table.Column<DateTime>(nullable: false),
                     Period = table.Column<int>(maxLength: 1, nullable: false),
-                    Comment = table.Column<string>(maxLength: 255, nullable: true)
+                    Comment = table.Column<string>(maxLength: 255, nullable: true),
+                    Status = table.Column<int>(nullable: false),
+                    StatusModifyDate = table.Column<DateTime>(nullable: false),
+                    ModifyDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -73,6 +73,12 @@ namespace Banking.Migrations
                     b.Property<DateTime>("ScheduleDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StatusModifyDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("BillPayID");
 
                     b.HasIndex("AccountNumber");

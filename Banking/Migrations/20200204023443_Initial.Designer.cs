@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Banking.Migrations
 {
     [DbContext(typeof(BankingContext))]
-    [Migration("20200203121351_LockLogin")]
-    partial class LockLogin
+    [Migration("20200204023443_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -73,6 +73,12 @@ namespace Banking.Migrations
                         .HasMaxLength(1);
 
                     b.Property<DateTime>("ScheduleDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StatusModifyDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("BillPayID");
