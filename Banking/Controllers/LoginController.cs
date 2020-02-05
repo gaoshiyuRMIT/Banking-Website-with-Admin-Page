@@ -45,7 +45,8 @@ namespace Banking.Controllers
                     await LMgr.IncrementAttemptsAsync(viewModel.Login);
                 return View(viewModel);
             }
-
+            
+            await LMgr.ClearAttemptsAsync(viewModel.Login);
             CustomerSessionKey.SetToSession(viewModel.Login.Customer, HttpContext.Session);
 
             return RedirectToAction("Index", "Customer");
