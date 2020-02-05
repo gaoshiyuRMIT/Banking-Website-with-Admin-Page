@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
@@ -22,11 +23,9 @@ namespace BankingAdmin.Models.Manager
             _set = _context.Login;
         }
 
-        public async Task<IEnumerable<Login>> GetManyAsync(Func<Login, bool> predicate)
+        public async Task<IEnumerable<Login>> GetManyAsync(Expression<Func<Login, bool>> predicate)
         {
-            var logins = from login in _set
-                        where predicate(login)
-                        select login;
+            var logins = _set.Where(predicate);
             return await logins.ToListAsync();
         }
 
