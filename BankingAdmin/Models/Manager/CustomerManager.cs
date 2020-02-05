@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
@@ -45,12 +46,9 @@ namespace BankingAdmin.Models.Manager {
             return TrimCustomer(await _set.FindAsync(customerId));
         }
 
-        public async Task<IEnumerable<Customer>> GetManyAsync(Func<Customer, bool> predicate)
+        public async Task<IEnumerable<Customer>> GetManyAsync(Expression<Func<Customer, bool>> predicate)
         {
-            var customers = from customer in _set
-                            where predicate(customer)
-                            select TrimCustomer(customer);
-            return await customers.ToListAsync();
+            throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<Customer>> GetAllAsync()

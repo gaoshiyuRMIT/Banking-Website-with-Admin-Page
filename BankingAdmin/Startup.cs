@@ -45,6 +45,7 @@ namespace BankingAdmin
             });
             services.AddScoped<IAsyncRepository<Customer, int>, CustomerManager>();
             services.AddScoped<IAsyncSearchRepository<Transaction, TransactionQuery>, TransactionManager>();
+            services.AddScoped<IAsyncRepository<Login, string>, LoginManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
