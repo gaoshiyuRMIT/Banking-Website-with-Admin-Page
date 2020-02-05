@@ -19,6 +19,8 @@ namespace Banking.Managers
         public Task<Login> GetLoginForCustomerAsync(int customerId);
         public Task IncrementAttemptsAsync(Login login);
         public Task UpdateLockAsync(Login login);
+        public Task ClearAttemptsAsync(Login login);
+
 
     }
 
@@ -64,6 +66,12 @@ namespace Banking.Managers
                 login.Attempts = 0;
                 await _context.SaveChangesAsync(); 
             }
+        }
+
+        public async Task ClearAttemptsAsync(Login login)
+        {
+            login.Attempts = 0;
+            await _context.SaveChangesAsync();
         }
 
         public async Task UpdateLockAsync(Login login)
