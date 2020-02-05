@@ -34,10 +34,19 @@
     <th>TFN</th>
     <td>{{customer.tfn}}</td>
   </tr>
+  <tr>
+    <th>Status</th>
+    <td>{{customer.locked ? "Locked" : "Normal"}}</td>
+  </tr>
+
 
 </table>
 <div>
   <a [routerLink]="['/fetch-customer']">Back</a> |
   <a [routerLink]="" (click)="delete()">Delete</a> |
-  <a [routerLink]="['/edit-customer-detail', customerId]">Edit</a>
+  <a [routerLink]="['/edit-customer-detail', customerId]">Edit</a> | 
+  <a [routerLink]="" (click)="lock()">Lock</a>
+  <span *ngIf="customer.locked"> 
+    | <a [routerLink]="" (click)="unlock()">Unlock</a>
+  </span>
 </div>

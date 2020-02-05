@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 
-import {CustomerData, CustomerService} from '../../services/customer.service';
+import {CustomerData, CustomerService, CustomerDataWLogin} from '../../services/customer.service';
 
 
 @Component({
@@ -9,9 +9,9 @@ import {CustomerData, CustomerService} from '../../services/customer.service';
   templateUrl: './fetch-customer-detail.component.html'
 })
 export class FetchCustomerDetailComponent implements OnInit{
-  customer: CustomerData;
+  customer: CustomerDataWLogin;
   customerId: number;
-  errorMessage: string;
+  errorMessage: string = "";
 
   constructor(private _customerService: CustomerService, private _avRoute: ActivatedRoute,
     private _router: Router) {
@@ -24,8 +24,14 @@ export class FetchCustomerDetailComponent implements OnInit{
   }
 
   refreshCustomer() {
-    this._customerService.getCustomerById(this.customerId).subscribe(data => this.customer = data,
-      error => this.errorMessage = error);
+    this._customerService.getCustomerById(this.customerId).subscribe(
+      data => {
+        this._customerService.getLockedStatusById(this.customerId).subscribe(
+          locked => this.customer = this._customerService.ConstructCustomerDataWLogin(data, locked),
+          error => this.errorMessage += error
+        )
+      },
+      error => this.errorMessage += error);
   }
 
   delete() {
@@ -34,6 +40,20 @@ export class FetchCustomerDetailComponent implements OnInit{
       this._customerService.deleteCustomer(this.customer.customerID).subscribe(data => {
         this._router.navigate(["/fetch-customer"]);
       })
+    }
+  }
+
+  lock() {
+    this._customerService.lockById(this.customer.customerID).subscribe(data => {
+      this.refreshCustomer();
+    });
+  }
+
+  unlock() {
+    if (this.customer.locked) {
+      this._customerService.unlockById(this.customer.customerID).subscribe(data => {
+        this.refreshCustomer();
+      });
     }
   }
 }  
