@@ -5,8 +5,8 @@ import { HttpClient,HttpParams } from "@angular/common/http";
 
 export interface TransactionHistoryData {
   transactionId: number;
-  modifyDate: number;
-  transactionType: number;
+  modifyDate: string;
+  transactionType: string;
   accountNumber: number;
   destAccountNumber: number;
   amount: number;
