@@ -10,7 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 
-import { transactionHistoryService } from './services/transacitonHistory.service';
+import { transactionHistoryService } from './services/TransacitonHistory.service';
 import { transactionHistoryComponent } from './transaction-history/transaction-history.component';
 
 
