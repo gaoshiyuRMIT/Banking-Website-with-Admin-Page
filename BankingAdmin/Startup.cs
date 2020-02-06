@@ -32,6 +32,9 @@ namespace BankingAdmin
             {
                 options.JsonSerializerOptions.IgnoreReadOnlyProperties = true;
                 options.JsonSerializerOptions.Converters.Add(new BankingDateTimeConverter());
+                options.JsonSerializerOptions.Converters.Add(new EnumConverter<BillPayPeriod>());
+                options.JsonSerializerOptions.Converters.Add(new EnumConverter<BillPayStatus>());
+                options.JsonSerializerOptions.Converters.Add(new EnumConverter<TransactionType>());
             });
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

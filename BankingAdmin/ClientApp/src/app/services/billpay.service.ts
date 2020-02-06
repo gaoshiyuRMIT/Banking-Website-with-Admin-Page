@@ -8,9 +8,9 @@ export interface BillPayData {
     comment: string;
     modifyDate: string;
     payee: PayeeData;
-    period: number;
+    period: string;
     scheduleDate: string;
-    status: number;
+    status: string;
     statusModifyDate: string;
 }
 
