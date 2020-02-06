@@ -1,0 +1,34 @@
+<h1>Bill Pays</h1>
+
+<p *ngIf="!billpayList"><em>Loading...</em></p>
+
+<table class="table" *ngIf="billpayList">
+    <thead>
+      <tr>
+        <td>ID</td>
+        <td>Account</td>
+        <td>Amount</td>
+        <td>Scheduled Date</td>
+        <td>Period</td>
+        <td>Payee</td>
+        <td>Status</td>
+        <td>Comment</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let billpay of billpayList">
+        <td>{{billpay.billPayID}}</td>
+        <td>{{billpay.accountNumber}}</td>
+        <td>{{billpay.amount}}</td>
+        <td>{{billpay.scheduleDate}}</td>
+        <td>{{billpay.period}}</td>
+        <td>{{billpay.payee.name}}</td>
+        <td>{{billpay.status}}</td>
+        <td>{{billpay.comment}}</td>
+        <td>
+          <a [routerLink]="" (click)="block(billpay.billPayID)">Block</a> |
+          <a [routerLink]="" (click)="unblock(billpay.billPayID)">Unblock</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
