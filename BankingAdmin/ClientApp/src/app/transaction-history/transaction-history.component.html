@@ -3,33 +3,47 @@
 <p *ngIf="!historyList"><em>Loading...</em></p>
 
 <form #formDir="ngForm" [formGroup]="transactionHistoryForm" (ngSubmit)="search()">
-    <div class="form-group col-sm-auto">
-        <div class="col-sm">
-            <label class="col-form-label col-sm-auto">Customer ID</label>
 
-            <input type="number" formControlName="customerId" class="form-control" />
-       
-        <!-- <div class="text-danger" *ngIf="customerId.invalid && formDir.submitted">
-    <div *ngIf="customerId.errors.max || customerId.errors.min">
-        Must be exactly 4 digits long.
-    </div>-->
-        <label class="col-form-label col-sm-auto">Account Type</label>
-        
+    <table class="table" *ngIf="searchhistory">
+        <thead>
+            <tr>
+                <td>Customer ID</td>
+                <td>Account Type</td>
+                <td>Date</td>
+                <td>Amount</td>
 
-            <select class="form-control" data-val="true" formControlName="AccountType">
-                <option value="">-- Select AccountType --</option>
-                <option value="Saving">Saving</option>
-                <option value="Checking">Checking</option>
-            </select>
-       
-        <label class="col-form-label col-sm-auto">Amount</label>
-        
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let search of searchList">
+                <td>
+                    <div class="col-md-4"> <input class="form-control" type="number" formControlName="CustomerId"> </div>
+                </td>
+                <td>
+                    <div class="col-md-4">
+                        <select class="form-control" data-val="true" formControlName="AccountType">
+                            <option value="">-- Select AccountType --</option>
+                            <option value="Saving">Saving</option>
+                            <option value="Checking">Checking</option>
+                        </select>
+                    </div>
 
-            <input class="form-control" type="number" formControlName="Amount">
-            to <input class="form-control" type="number" formControlName="Amount">
-        </div>
+                </td>
+                <!--<td><ejs-daterangepicker id='daterangepicker' placeholder='Select a range' [startDate]='start' [endDate]='end'></ejs-daterangepicker></td>
 
-    </div>
+        -->
+                <td>
+                    <div class="col-md-4">
+                        <input class="form-control" type="number" formControlName="Amount">
+                        to <input class="form-control" type="number" formControlName="Amount">
+                    </div>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    
 
 
     <div class="form-group">
@@ -72,3 +86,9 @@
         </tr>
     </tbody>
 </table>
+
+<div class="form-group">
+    <button type="submit" class="btn btn-primary">Graph1</button>
+    <button type="submit" class="btn btn-primary">Graph1</button>
+    <button type="submit" class="btn btn-primary">Graph1</button>
+</div>

@@ -17,23 +17,25 @@ export class transactionHistoryComponent {
       customerId: [null, [Validators.max(9999), Validators.min(0)]]
     });
   }
+
+
   getTransactionHistory() {
     this._transactionHistoryService.getTransactionHistory().subscribe(data => this.historyList = data,
       error => console.error(error));
   }
 
-  //search() {
-  //  if (this.customerId.value !== null)
-  //    this._transactionHistoryService.getCustomerById(this.customerId.value).subscribe(
-  //      data => {
-  //        this.historyList = data !== null ? [data] : [];
-  //      },
-  //      error => console.error(error));
-  //  else
-  //    this.getTransactionHistory();
-  //}
+//  search() {
+//    if (this.customerId.value !== null)
+//     this._transactionHistoryService.getCustomerById(this.customerId.value).subscribe(
+//        data => {
+//          this.historyList = data !== null ? [data] : [];
+//       },
+//        error => console.error(error));
+//    else
+//      this.getTransactionHistory();
+//  }
 
-    get transactionId() {
-      return this.transactionHistoryForm.get("transactionId");
-  }
-}
+//    get transactionId() {
+//      return this.transactionHistoryForm.get("transactionId");
+//  }
+//}
