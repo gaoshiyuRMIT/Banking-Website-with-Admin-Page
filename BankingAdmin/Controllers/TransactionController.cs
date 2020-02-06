@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,6 +22,7 @@ namespace BankingAdmin.Controllers
             _repo = repo;
         }
 
+
         private static Transaction TrimTransaction(Transaction t)
         {
             return new Transaction
@@ -35,11 +36,12 @@ namespace BankingAdmin.Controllers
             };
         }
 
+
         [HttpGet]
         public async Task<IEnumerable<Transaction>> Get([FromQuery] TransactionQuery query)
         {
             return (await _repo.GetManyByQueryAsync(query)).Select(x => TrimTransaction(x));
         }
-
+        
     }
 }
