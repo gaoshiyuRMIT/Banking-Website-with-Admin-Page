@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,7 +8,6 @@ using BankingAdmin.Models.Manager;
 using BankingAdmin.Models.Repository;
 using BankingLib.Models;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace BankingAdmin.Controllers
 {
@@ -23,15 +22,23 @@ namespace BankingAdmin.Controllers
             _repo = repo;
         }
 
-        //[HttpGet]
-        //public async Task<IEnumerable<Transaction>> Get()
-        //{
-        //    return await _repo.GetAllAsync();
-        //}
+        private static Transaction TrimTransaction(Transaction t)
+        {
+            return new Transaction
+            {
+                TransactionID = t.TransactionID,
+                TransactionType = t.TransactionType,
+                AccountNumber = t.AccountNumber,
+                DestAccountNumber = t.DestAccountNumber,
+                Amount = t.Amount,
+                Comment = t.Comment
+            };
+        }
+
         [HttpGet]
         public async Task<IEnumerable<Transaction>> Get([FromQuery] TransactionQuery query)
         {
-            return await _repo.GetManyByQueryAsync(query);
+            return (await _repo.GetManyByQueryAsync(query)).Select(x => TrimTransaction(x));
         }
         
     }
