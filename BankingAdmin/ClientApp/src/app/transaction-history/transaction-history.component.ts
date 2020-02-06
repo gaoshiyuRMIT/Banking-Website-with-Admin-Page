@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { transactionHistoryService, TransactionHistoryData } from '../services/transacitonHistory.service';
+import { transactionHistoryService, TransactionHistoryData } from '../services/TransacitonHistory.service';
 
 @Component({
   selector: 'app-transaction-history',
