@@ -10,12 +10,18 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 
+import { transactionHistoryService } from './services/transacitonHistory.service';
+import { transactionHistoryComponent } from './transaction-history/transaction-history.component';
+
+
+
 import {CustomerService} from './services/customer.service';
 import { FetchCustomerComponent } from './components/fetch-customer/fetch-customer.component';
 import {FetchCustomerDetailComponent} from './components/fetch-customer-detail/fetch-customer-detail.component';
 import {EditCustomerDetailComponent} from './components/edit-customer-detail/edit-customer-detail.component';
 import {FetchBillPayComponent} from './components/fetch-billpay/fetch-billpay.component';
 import { BillPayService } from './services/billpay.service';
+
 
 
 @NgModule({
@@ -28,6 +34,7 @@ import { BillPayService } from './services/billpay.service';
     FetchCustomerComponent,
     FetchCustomerDetailComponent,
     EditCustomerDetailComponent,
+    transactionHistoryComponent,
     FetchBillPayComponent,
   ],
   imports: [
@@ -43,9 +50,11 @@ import { BillPayService } from './services/billpay.service';
       {path: 'fetch-customer-detail/:id', component: FetchCustomerDetailComponent},
       {path: 'edit-customer-detail/:id', component: EditCustomerDetailComponent},
       {path: 'fetch-billpay', component: FetchBillPayComponent},
+        { path: 'transaction-history', component: transactionHistoryComponent },
+
     ])
   ],
-  providers: [CustomerService, BillPayService],
+  providers: [CustomerService, BillPayService, transactionHistoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

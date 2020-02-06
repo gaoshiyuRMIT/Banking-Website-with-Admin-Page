@@ -9,6 +9,5 @@ namespace BankingAdmin.Models.Repository
     {
         Task<IEnumerable<TEntity>> GetManyByQueryAsync(TQuery query);
         Task<IEnumerable<TEntity>> GetManyAsync(IEnumerable<Expression<Func<TEntity, bool>>> predicateList);
-
     }
 }
