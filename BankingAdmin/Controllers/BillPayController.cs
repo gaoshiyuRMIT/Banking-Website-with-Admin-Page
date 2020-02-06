@@ -19,17 +19,33 @@ namespace BankingAdmin.Controllers
         {
             _repo = repo;
         }
+        private static BillPay TrimBillPay(BillPay b)
+        {
+            return new BillPay
+            {
+                BillPayID = b.BillPayID,
+                AccountNumber = b.AccountNumber,
+                Payee = b.Payee,
+                Amount = b.Amount,
+                ScheduleDate = b.ScheduleDate,
+                Period = b.Period,
+                Comment = b.Comment,
+                Status = b.Status,
+                StatusModifyDate = b.StatusModifyDate
+            };
+        }
 
         [HttpGet]
         public async Task<IEnumerable<BillPay>> Get()
         {
-            return await _repo.GetAllAsync();
+            var billPays = await _repo.GetAllAsync();
+            return billPays.Select(x => TrimBillPay(x));
         }
 
         [HttpGet("{billPayId}")]
         public async Task<BillPay> Get(int billPayId)
         {
-            return await _repo.GetAsync(billPayId);
+            return TrimBillPay(await _repo.GetAsync(billPayId));
         }
 
 
@@ -42,7 +58,7 @@ namespace BankingAdmin.Controllers
 
             billPay.Block();
             await _repo.UpdateAsync(billPayId, billPay);
-            return billPay;
+            return TrimBillPay(billPay);
         }
 
 
@@ -58,7 +74,7 @@ namespace BankingAdmin.Controllers
                 billPay.Unblock();
                 await _repo.UpdateAsync(billPayId, billPay);
             }
-            return billPay;
+            return TrimBillPay(billPay);
         }
 
     }
