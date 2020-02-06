@@ -60,7 +60,8 @@ namespace BankingAdmin.Models.Manager {
         public async Task<int> UpdateAsync(int customerId, Customer customer)
         {
             customer.CustomerID = customerId;
-            _set.Update(customer);
+            if (_set.Local.FirstOrDefault(x => x.CustomerID == customerId) == null)
+                _set.Update(customer);
             await _context.SaveChangesAsync();
             return customerId;
         }

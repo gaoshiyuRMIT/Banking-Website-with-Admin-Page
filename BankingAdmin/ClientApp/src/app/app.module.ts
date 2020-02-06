@@ -19,6 +19,8 @@ import {CustomerService} from './services/customer.service';
 import { FetchCustomerComponent } from './components/fetch-customer/fetch-customer.component';
 import {FetchCustomerDetailComponent} from './components/fetch-customer-detail/fetch-customer-detail.component';
 import {EditCustomerDetailComponent} from './components/edit-customer-detail/edit-customer-detail.component';
+import {FetchBillPayComponent} from './components/fetch-billpay/fetch-billpay.component';
+import { BillPayService } from './services/billpay.service';
 
 
 
@@ -32,7 +34,11 @@ import {EditCustomerDetailComponent} from './components/edit-customer-detail/edi
     FetchCustomerComponent,
     FetchCustomerDetailComponent,
     EditCustomerDetailComponent,
+<<<<<<< HEAD
     transactionHistoryComponent,
+=======
+    FetchBillPayComponent,
+>>>>>>> e9bf8ad92fe191b9d5fa1f9a3f844ce100de6e1f
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -45,11 +51,19 @@ import {EditCustomerDetailComponent} from './components/edit-customer-detail/edi
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'fetch-customer', component: FetchCustomerComponent },
       {path: 'fetch-customer-detail/:id', component: FetchCustomerDetailComponent},
+<<<<<<< HEAD
       { path: 'edit-customer-detail/:id', component: EditCustomerDetailComponent },
       { path: 'transaction-history', component: transactionHistoryComponent },
     ])
   ],
   providers: [CustomerService, transactionHistoryService],
+=======
+      {path: 'edit-customer-detail/:id', component: EditCustomerDetailComponent},
+      {path: 'fetch-billpay', component: FetchBillPayComponent},
+    ])
+  ],
+  providers: [CustomerService, BillPayService],
+>>>>>>> e9bf8ad92fe191b9d5fa1f9a3f844ce100de6e1f
   bootstrap: [AppComponent]
 })
 export class AppModule { }
