@@ -61,7 +61,8 @@ namespace BankingAdmin.Models.Manager
         public async Task<int> UpdateAsync(int id, BillPay item)
         {
             item.BillPayID = id;
-            _set.Update(item);
+            if (_set.Local.FirstOrDefault(x => x.BillPayID == id) == null)
+                _set.Update(item);
             await _context.SaveChangesAsync();
             return item.BillPayID;
         }
