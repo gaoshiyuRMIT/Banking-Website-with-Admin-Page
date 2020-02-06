@@ -23,11 +23,16 @@ namespace BankingAdmin.Controllers
             _repo = repo;
         }
 
+        //[HttpGet]
+        //public async Task<IEnumerable<Transaction>> Get()
+        //{
+        //    return await _repo.GetAllAsync();
+        //}
         [HttpGet]
         public async Task<IEnumerable<Transaction>> Get([FromQuery] TransactionQuery query)
         {
             return await _repo.GetManyByQueryAsync(query);
         }
-
+        
     }
 }

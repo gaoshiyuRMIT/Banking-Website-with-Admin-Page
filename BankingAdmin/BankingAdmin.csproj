@@ -29,17 +29,24 @@
     <Content Remove="$(SpaRoot)**" />
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+    <None Remove="ClientApp\src\app\transaction-history\transaction-history.component.ts" />
+    <None Remove="ClientApp\src\app\services\TransacitonHistory.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Models\Repository\" />
     <Folder Include="Models\Manager\" />
     <Folder Include="Models\Json\" />
+    <Folder Include="ClientApp\src\app\transaction-history\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BankingLib\BankingLib.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\transaction-history\transaction-history.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\transacitonHistory.service.ts" />
   </ItemGroup>
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
