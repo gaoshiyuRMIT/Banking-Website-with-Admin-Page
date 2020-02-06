@@ -22,6 +22,7 @@ namespace BankingAdmin.Controllers
             _repo = repo;
         }
 
+
         private static Transaction TrimTransaction(Transaction t)
         {
             return new Transaction
@@ -34,6 +35,7 @@ namespace BankingAdmin.Controllers
                 Comment = t.Comment
             };
         }
+
 
         [HttpGet]
         public async Task<IEnumerable<Transaction>> Get([FromQuery] TransactionQuery query)

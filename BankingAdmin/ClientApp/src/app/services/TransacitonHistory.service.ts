@@ -1,16 +1,16 @@
 import { Injectable, Inject } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient,HttpParams } from "@angular/common/http";
 
 
 
 export interface TransactionHistoryData {
-  TransactionId: number;
-  ModifyDate: number;
-  TransactionType: number;
-  AccountNumber: number;
-  DestAccountNumber: number;
-  Amount: number;
-  Comment: string;
+  transactionId: number;
+  modifyDate: number;
+  transactionType: number;
+  accountNumber: number;
+  destAccountNumber: number;
+  amount: number;
+  comment: string;
 
 }
 @Injectable()
@@ -21,23 +21,32 @@ export class transactionHistoryService {
     this.myAppUrl = baseUrl;
   }
 
-  TrimTransactionHistoryData(t: TransactionHistoryData): TransactionHistoryData {
+  TrimTransactionHistoryData(t: TransactionHistoryData): TransactionHistoryData
+  {
     return {
-      TransactionId: t.TransactionId,
-      ModifyDate: t.ModifyDate,
-      TransactionType: t.TransactionType,
-      AccountNumber: t.AccountNumber,
-      DestAccountNumber: t.DestAccountNumber,
-      Amount: t.Amount,
-      Comment: t.Comment,
+      transactionId: t.transactionId,
+      modifyDate: t.modifyDate,
+      transactionType: t.transactionType,
+      accountNumber: t.accountNumber,
+      destAccountNumber: t.destAccountNumber,
+      amount: t.amount,
+      comment: t.comment,
    };
   }
 
   getTransactionHistory() {
-  params = new HttpParams().set('customerId', 'value');
-    return this._http.get<TransactionHistoryData[]>(this.myAppUrl + "api/TransactionHistory", { params: params })
+  //params = new HttpParams().set('customerId', 'value');, { params: params }
+
+    const params = new HttpParams().set('Amount', '20');
+    return this._http.get<TransactionHistoryData[]>(this.myAppUrl + "api/Transaction",{ params: params })
 }
 
+  getTransactionHistoryById(id: number)
+  {
+    return this._http.get<TransactionHistoryData>(this.myAppUrl + "api/Transaction/" + id);
+  }
+
+ 
   //   getTransactionHistory() {
   //  return this._http.get<TransactionHistoryData[]>(this.myAppUrl + "api/");
   //}
