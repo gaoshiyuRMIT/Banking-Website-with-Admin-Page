@@ -14,6 +14,8 @@ import {CustomerService} from './services/customer.service';
 import { FetchCustomerComponent } from './components/fetch-customer/fetch-customer.component';
 import {FetchCustomerDetailComponent} from './components/fetch-customer-detail/fetch-customer-detail.component';
 import {EditCustomerDetailComponent} from './components/edit-customer-detail/edit-customer-detail.component';
+import {FetchBillPayComponent} from './components/fetch-billpay/fetch-billpay.component';
+import { BillPayService } from './services/billpay.service';
 
 
 @NgModule({
@@ -26,6 +28,7 @@ import {EditCustomerDetailComponent} from './components/edit-customer-detail/edi
     FetchCustomerComponent,
     FetchCustomerDetailComponent,
     EditCustomerDetailComponent,
+    FetchBillPayComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -39,9 +42,10 @@ import {EditCustomerDetailComponent} from './components/edit-customer-detail/edi
       { path: 'fetch-customer', component: FetchCustomerComponent },
       {path: 'fetch-customer-detail/:id', component: FetchCustomerDetailComponent},
       {path: 'edit-customer-detail/:id', component: EditCustomerDetailComponent},
+      {path: 'fetch-billpay', component: FetchBillPayComponent},
     ])
   ],
-  providers: [CustomerService],
+  providers: [CustomerService, BillPayService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
