@@ -32,9 +32,15 @@ export class transactionHistoryService {
       Comment: t.Comment,
    };
   }
+
   getTransactionHistory() {
-    return this._http.get<TransactionHistoryData[]>(this.myAppUrl + "api/");
-  }
+  params = new HttpParams().set('customerId', 'value');
+    return this._http.get<TransactionHistoryData[]>(this.myAppUrl + "api/TransactionHistory", { params: params })
+}
+
+  //   getTransactionHistory() {
+  //  return this._http.get<TransactionHistoryData[]>(this.myAppUrl + "api/");
+  //}
   
   //getTransactionHistoryById(id: number) {
     //return this._http.get<TransactionHistoryData>(this.myAppUrl + "api/TransactionHistory/" + id);
