@@ -18,17 +18,33 @@ namespace BankingAdmin.Controllers
         {
             _repo = repo;
         }
-        
+        private static Customer TrimCustomer(Customer c)
+        {
+            if (c != null)
+                return new Customer
+                {
+                    CustomerID = c.CustomerID,
+                    Name = c.Name,
+                    Address = c.Address,
+                    City = c.City,
+                    State = c.State,
+                    PostCode = c.PostCode,
+                    Phone = c.Phone,
+                    TFN = c.TFN
+                };
+            return c;
+        }
+
         [HttpGet]
         public async Task<IEnumerable<Customer>> Get()
         {
-            return await _repo.GetAllAsync();
+            return (await _repo.GetAllAsync()).Select(x => TrimCustomer(x));
         }
 
         [HttpGet("{customerId}")]
         public async Task<Customer> Get(int customerId)
         {
-            return await _repo.GetAsync(customerId);
+            return TrimCustomer(await _repo.GetAsync(customerId));
         }
 
         [HttpPost("Add")]

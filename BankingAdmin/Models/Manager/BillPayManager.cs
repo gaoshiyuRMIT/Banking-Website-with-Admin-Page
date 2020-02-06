@@ -22,21 +22,6 @@ namespace BankingAdmin.Models.Manager
             _set = _context.BillPay;
         }
 
-        private static BillPay TrimBillPay(BillPay b)
-        {
-            return new BillPay
-            {
-                BillPayID = b.BillPayID,
-                AccountNumber = b.AccountNumber,
-                Payee = b.Payee,
-                Amount = b.Amount,
-                ScheduleDate = b.ScheduleDate,
-                Period = b.Period,
-                Comment = b.Comment,
-                Status = b.Status,
-                StatusModifyDate = b.StatusModifyDate
-            };
-        }
 
         public async Task<IEnumerable<BillPay>> GetManyAsync(Expression<Func<BillPay, bool>> predicate)
         {
@@ -44,13 +29,12 @@ namespace BankingAdmin.Models.Manager
         }
         public async Task<IEnumerable<BillPay>> GetAllAsync()
         {
-            var billPays = from billPay in _set select TrimBillPay(billPay);
-            return await billPays.ToListAsync();
+            return await _set.ToListAsync();
         }
 
         public async Task<BillPay> GetAsync(int id)
         {
-            return TrimBillPay(await _set.FindAsync(id));
+            return await _set.FindAsync(id);
         }
 
         public async Task<int> AddAsync(BillPay item)
@@ -61,7 +45,7 @@ namespace BankingAdmin.Models.Manager
         public async Task<int> UpdateAsync(int id, BillPay item)
         {
             item.BillPayID = id;
-            if (_set.Local.FirstOrDefault(x => x.BillPayID == id) == null)
+            if (_set.Local.FirstOrDefault(x => x.BillPayID == item.BillPayID) == null)
                 _set.Update(item);
             await _context.SaveChangesAsync();
             return item.BillPayID;

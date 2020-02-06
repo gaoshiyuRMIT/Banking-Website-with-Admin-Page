@@ -24,26 +24,9 @@ namespace BankingAdmin.Models.Manager {
             _set = _context.Customer;
         }
 
-        private static Customer TrimCustomer(Customer c)
-        {
-            if (c != null)
-                return new Customer
-                {
-                    CustomerID = c.CustomerID,
-                    Name = c.Name,
-                    Address = c.Address,
-                    City = c.City,
-                    State = c.State,
-                    PostCode = c.PostCode,
-                    Phone = c.Phone,
-                    TFN = c.TFN
-                };
-            return c;
-        }
-
         public async Task<Customer> GetAsync(int customerId)
         {
-            return TrimCustomer(await _set.FindAsync(customerId));
+            return await _set.FindAsync(customerId);
         }
 
         public async Task<IEnumerable<Customer>> GetManyAsync(Expression<Func<Customer, bool>> predicate)
@@ -53,8 +36,7 @@ namespace BankingAdmin.Models.Manager {
 
         public async Task<IEnumerable<Customer>> GetAllAsync()
         {
-            var customers = from customer in _set select TrimCustomer(customer);
-            return await customers.ToListAsync();
+            return await _set.ToListAsync();
         }
 
         public async Task<int> UpdateAsync(int customerId, Customer customer)
