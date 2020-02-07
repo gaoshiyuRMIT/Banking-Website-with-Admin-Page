@@ -94,7 +94,7 @@
 
     </div>
 
-    <div>
+    <div class="form-group row">
       <button type="submit" class="btn btn-primary">Search</button>
     </div>
 
@@ -102,19 +102,19 @@
 
 <p *ngIf="!transactionList"><em>Loading...</em></p>
 
-<div *ngIf="transactionList">
+<div *ngIf="transactionList" class="text-center">
   <ul class="nav nav-tabs">
-    <li class="nav-item">
-      <a class="nav-link" (click)="showTable()">Table</a>
+    <li class="nav-item col-sm">
+      <a class="nav-link" (click)="showTable()" [class.active]="displayList">Table</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" (click)="showBar()">Bar Chart</a>
+    <li class="nav-item col-sm">
+      <a class="nav-link" (click)="showBar()" [class.active]="displayBar">Bar Chart</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" (click)="showLine()">Line Chart</a>
+    <li class="nav-item col-sm">
+      <a class="nav-link" (click)="showLine()" [class.active]="displayLine">Line Chart</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" (click)="showPie()">Pie Chart</a>
+    <li class="nav-item col-sm">
+      <a class="nav-link" (click)="showPie()" [class.active]="displayPie">Pie Chart</a>
     </li>
   </ul>
 </div>
