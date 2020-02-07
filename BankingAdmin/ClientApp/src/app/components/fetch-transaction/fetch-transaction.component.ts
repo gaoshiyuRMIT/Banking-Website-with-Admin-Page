@@ -14,6 +14,9 @@ export class FetchTransactionComponent {
     transactionList: TransactionData[];
     queryForm: FormGroup;
     option: FetchTransactionOption = FetchTransactionOption.list;
+    barChart: any;
+    lineChart: any;
+    pieChart: any;
 
     constructor(private _transactionService: TransactionService, private _avRoute: ActivatedRoute,
       private _router: Router, private _fb: FormBuilder) {
@@ -48,6 +51,7 @@ export class FetchTransactionComponent {
 
     showBar() {
         this.option = FetchTransactionOption.barChart;
+        this.updateBarChart();
     }
 
     showLine() {
@@ -106,13 +110,22 @@ export class FetchTransactionComponent {
       return this.queryForm.get("commentContains");
     }
 
+    updatePieChart() {
+      const t2c = this._transactionService.getTypeToCount(this.transactionList);
+      const data = t2c.map(v => v.count);
+      this.pieChart.data.datasets.forEach(dataset => {
+        dataset.data = data;
+      });
+      this.pieChart.update();
+    }
+
     createPieChart() {
       // type to count
       const canvas = document.getElementById("pieChart");
       const t2c = this._transactionService.getTypeToCount(this.transactionList);
       const data = t2c.map(v => v.count);
       const labels = t2c.map(v => v.type);
-      new Chart(canvas, {
+      this.pieChart = new Chart(canvas, {
         type: 'pie',
         data: {
           labels: labels,
@@ -131,6 +144,17 @@ export class FetchTransactionComponent {
       });
     }
 
+    updateLineChart() {
+      const d2a = this._transactionService.getDateToTotalAmount(this.transactionList);
+      const data = d2a.map(v => {
+        return {t: v.date, y: v.amount};
+      });
+      this.lineChart.data.datasets.forEach(dataset => {
+        dataset.data = data;
+      });
+      this.lineChart.update();
+    }
+
     createLineChart() {
       // date to total amount
       const canvas = document.getElementById("lineChart");
@@ -139,7 +163,7 @@ export class FetchTransactionComponent {
         return {t: v.date, y: v.amount};
       });
       const labels = d2a.map(v => v.dateLabel);
-      new Chart(canvas, {
+      this.lineChart = new Chart(canvas, {
         type: "line",
         data: {
           labels: labels,
@@ -165,6 +189,13 @@ export class FetchTransactionComponent {
 
     }
 
+    updateBarChart() {
+      const d2c = this._transactionService.getDateToCount(this.transactionList);
+      const data = d2c.map(val => {return {t: val.date, y: val.count};});
+      this.barChart.data.datasets.forEach((dataset) => dataset.data = data);
+      this.barChart.update();
+    }
+
     createBarChart() {
       // date to count
       let canvas = document.getElementById("barChart");
@@ -175,7 +206,7 @@ export class FetchTransactionComponent {
         labels.push(val.dateLabel);
         data.push({t: val.date, y: val.count});
       }
-      new Chart(canvas, {
+      this.barChart = new Chart(canvas, {
         type: "bar",
         data: {
           labels: labels,
@@ -196,6 +227,9 @@ export class FetchTransactionComponent {
             borderColor: "rgba(255, 99, 132, 1)",
             borderWidth: 1
           }]
+        },
+        options: {
+          responsive: true
         }
       });
     }
@@ -206,7 +240,7 @@ export class FetchTransactionComponent {
           this.transactionList = data;
           this.transactionList.forEach((val, idx, arr) => 
             arr[idx] = this._transactionService.transformTransactionData(val)); 
-          this.createCharts();
+          this.updateCharts();
         },
         error => console.error(error)
       );
@@ -216,6 +250,12 @@ export class FetchTransactionComponent {
       this.createBarChart();
       this.createLineChart();
       this.createPieChart();
+    }
+
+    updateCharts() {
+      this.updateBarChart();
+      this.updateLineChart();
+      this.updatePieChart();
     }
   }
 
