@@ -88,6 +88,10 @@
       <div class="text-danger" *ngIf="(modifyDateFrom.invalid || modifyDateTo.invalid) && formDir.submitted">
         Invalid date range.
       </div>
+      <div class="text-danger" *ngIf="modifyDateFrom.value && modifyDateTo.value && (modifyDateFrom.value > modifyDateTo.value) && formDir.submitted">
+        Invalid date range.
+      </div>
+
     </div>
 
     <div>
