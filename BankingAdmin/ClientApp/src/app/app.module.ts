@@ -21,6 +21,8 @@ import {FetchCustomerDetailComponent} from './components/fetch-customer-detail/f
 import {EditCustomerDetailComponent} from './components/edit-customer-detail/edit-customer-detail.component';
 import {FetchBillPayComponent} from './components/fetch-billpay/fetch-billpay.component';
 import { BillPayService } from './services/billpay.service';
+import {TransactionService} from './services/transaction.service';
+import {FetchTransactionComponent} from './components/fetch-transaction/fetch-transaction.component';
 
 
 
@@ -36,6 +38,7 @@ import { BillPayService } from './services/billpay.service';
     EditCustomerDetailComponent,
     transactionHistoryComponent,
     FetchBillPayComponent,
+    FetchTransactionComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -51,10 +54,11 @@ import { BillPayService } from './services/billpay.service';
       {path: 'edit-customer-detail/:id', component: EditCustomerDetailComponent},
       {path: 'fetch-billpay', component: FetchBillPayComponent},
         { path: 'transaction-history', component: transactionHistoryComponent },
+        {path: 'fetch-transaction', component: FetchTransactionComponent},
 
     ])
   ],
-  providers: [CustomerService, BillPayService, transactionHistoryService],
+  providers: [CustomerService, BillPayService, transactionHistoryService, TransactionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
