@@ -18,7 +18,11 @@ export class FetchTransactionComponent {
       private _router: Router, private _fb: FormBuilder) {
       
       this._transactionService.getTransactionsByQuery({}).subscribe(
-        data => this.transactionList = data,
+        data => {
+          this.transactionList = data;
+          this.transactionList.forEach((val, idx, arr) => 
+            arr[idx] = this._transactionService.transformTransactionData(val)); 
+        },
         error => console.error(error));
       this.queryForm = this.createFormGroup();
     }
@@ -75,7 +79,9 @@ export class FetchTransactionComponent {
     search() {
       this._transactionService.getTransactionsByQuery(this.queryForm.value).subscribe(
         data => {
-          this.transactionList = data; 
+          this.transactionList = data;
+          this.transactionList.forEach((val, idx, arr) => 
+            arr[idx] = this._transactionService.transformTransactionData(val)); 
         },
         error => console.error(error)
       );

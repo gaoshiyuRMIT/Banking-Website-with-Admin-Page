@@ -29,7 +29,7 @@ export interface TransactionQueryFormData
 @Injectable()
 export class TransactionService {
   myAppUrl: string = "";
-  readonly format: string = "DD/MM/YYYY hh:MM a";
+  readonly format: string = "DD/MM/YYYY hh:mm:ss A";
 
   constructor(private _http: HttpClient, @Inject("BASE_URL") baseUrl: string)
   {
@@ -39,7 +39,7 @@ export class TransactionService {
 
   transformTransactionData(td: TransactionData): TransactionData
   {
-    td.modifyDate = moment(td.modifyDate, this.format).local().format(this.format);
+    td.modifyDate = moment.utc(td.modifyDate, this.format).local().format(this.format);
     return td;
   }
 
