@@ -35,7 +35,7 @@ namespace Banking.Controllers
         public async Task<IActionResult> Index(LoginViewModel viewModel)
         {
             viewModel.Login = await LMgr.GetLoginAsync(viewModel.Login.UserID);
-            if (viewModel.Login.IsLocked)
+            if (viewModel.Login?.IsLocked == true)
                 await LMgr.UpdateLockAsync(viewModel.Login);
 
             viewModel.Validate(ModelState);

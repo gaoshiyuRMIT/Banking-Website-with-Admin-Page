@@ -27,7 +27,7 @@ namespace Banking.ViewModels
                 modelState.AddModelError("Login.UserID", "Account locked, please try later.");
                 return;
             }
-            _authFailed = !Login.Verify(Password);
+            _authFailed = Login?.Verify(Password) == false;
             if (Login == null || AuthFailed)
                 modelState.AddModelError("LoginFailed", "Login failed, please try again.");
         }
