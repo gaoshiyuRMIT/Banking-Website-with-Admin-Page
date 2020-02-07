@@ -32,7 +32,8 @@ namespace BankingAdmin.Controllers
                 AccountNumber = t.AccountNumber,
                 DestAccountNumber = t.DestAccountNumber,
                 Amount = t.Amount,
-                Comment = t.Comment
+                Comment = t.Comment,
+                ModifyDate = t.ModifyDate
             };
         }
 
