@@ -23,8 +23,7 @@ export class FetchTransactionComponent {
           this.transactionList = data;
           this.transactionList.forEach((val, idx, arr) => 
             arr[idx] = this._transactionService.transformTransactionData(val)); 
-          this.createBarChart();
-
+          this.createCharts();        
         },
         error => console.error(error));
       this.queryForm = this.createFormGroup();
@@ -92,11 +91,69 @@ export class FetchTransactionComponent {
       return this.queryForm.get("commentContains");
     }
 
+    createPieChart() {
+      // type to count
+      const canvas = document.getElementById("pieChart");
+      const t2c = this._transactionService.getTypeToCount(this.transactionList);
+      const data = t2c.map(v => v.count);
+      const labels = t2c.map(v => v.type);
+      new Chart(canvas, {
+        type: 'pie',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: "Transaction Count by Type",
+            data: data,
+            backgroundColor: [
+              "rgba(255, 157, 0, 0.5)",
+              "rgba(255, 208, 48, 0.5)",
+              "rgba(0, 196, 195, 0.5)",
+              "rgba(0, 158, 242, 0.5)",
+              "rgba(255, 77, 125, 0.5)"
+            ]
+          }]
+        }
+      });
+    }
+
+    createLineChart() {
+      // date to total amount
+      const canvas = document.getElementById("lineChart");
+      const d2a = this._transactionService.getDateToTotalAmount(this.transactionList);
+      const data = d2a.map(v => {
+        return {t: v.date, y: v.amount};
+      });
+      const labels = d2a.map(v => v.dateLabel);
+      new Chart(canvas, {
+        type: "line",
+        data: {
+          labels: labels,
+          datasets: [{
+            label: "Transaction Amount",
+            data: data,
+            options: {
+              scales: {
+                xAxes: [{
+                  type: "time",
+                  time: {
+                    unit: "day"
+                  }
+                }]
+              }
+            },
+            backgroundColor: "rgba(0, 183, 0, 0.2)",
+            borderColor: "rgba(0, 183, 0, 1)",
+            borderWidth: 1
+          }]
+        }
+      });
+
+    }
+
     createBarChart() {
       // date to count
       let canvas = document.getElementById("barChart");
       const d2c = this._transactionService.getDateToCount(this.transactionList);
-      console.log(d2c);
       const data = [];
       const labels = [];
       for(let val of d2c) {
@@ -108,7 +165,7 @@ export class FetchTransactionComponent {
         data: {
           labels: labels,
           datasets: [{
-            label: "Transaction count",
+            label: "Transaction Count",
             data: data,
             options: {
               scales: {
@@ -134,10 +191,16 @@ export class FetchTransactionComponent {
           this.transactionList = data;
           this.transactionList.forEach((val, idx, arr) => 
             arr[idx] = this._transactionService.transformTransactionData(val)); 
-          this.createBarChart();
+          this.createCharts();
         },
         error => console.error(error)
       );
+    }
+
+    createCharts() {
+      this.createBarChart();
+      this.createLineChart();
+      this.createPieChart();
     }
   }
 
