@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpParams } from '@angular/common/http';
+import {Chart} from 'chart.js';
 
 import { TransactionData, TransactionService } from '../../services/transaction.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -22,6 +23,8 @@ export class FetchTransactionComponent {
           this.transactionList = data;
           this.transactionList.forEach((val, idx, arr) => 
             arr[idx] = this._transactionService.transformTransactionData(val)); 
+          this.createBarChart();
+
         },
         error => console.error(error));
       this.queryForm = this.createFormGroup();
@@ -41,7 +44,20 @@ export class FetchTransactionComponent {
     }
 
     get displayList(): boolean {
-      return this.option === FetchTransactionOption.list;
+      // return this.option === FetchTransactionOption.list;
+      return true;
+    }
+
+    get displayBar() {
+      return true;
+    }
+
+    get displayLine() {
+      return true;
+    }
+
+    get displayPie() {
+      return true;
     }
 
     get transactionId() {
@@ -76,12 +92,49 @@ export class FetchTransactionComponent {
       return this.queryForm.get("commentContains");
     }
 
+    createBarChart() {
+      // date to count
+      let canvas = document.getElementById("barChart");
+      const d2c = this._transactionService.getDateToCount(this.transactionList);
+      console.log(d2c);
+      const data = [];
+      const labels = [];
+      for(let val of d2c) {
+        labels.push(val.dateLabel);
+        data.push({t: val.date, y: val.count});
+      }
+      new Chart(canvas, {
+        type: "bar",
+        data: {
+          labels: labels,
+          datasets: [{
+            label: "Transaction count",
+            data: data,
+            options: {
+              scales: {
+                xAxes: [{
+                  type: "time",
+                  time: {
+                    unit: "day"
+                  }
+                }]
+              }
+            },
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            borderColor: "rgba(255, 99, 132, 1)",
+            borderWidth: 1
+          }]
+        }
+      });
+    }
+
     search() {
       this._transactionService.getTransactionsByQuery(this.queryForm.value).subscribe(
         data => {
           this.transactionList = data;
           this.transactionList.forEach((val, idx, arr) => 
             arr[idx] = this._transactionService.transformTransactionData(val)); 
+          this.createBarChart();
         },
         error => console.error(error)
       );

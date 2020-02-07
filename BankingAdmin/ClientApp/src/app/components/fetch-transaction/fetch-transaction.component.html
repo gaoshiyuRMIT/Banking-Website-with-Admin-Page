@@ -128,3 +128,15 @@
         </tbody>
     </table>
 </div>
+
+<div class="container" *ngIf="displayBar">
+  <canvas id="barChart"></canvas>
+</div>
+
+<div class="container" *ngIf="displayLine">
+  <canvas id="lineChart"></canvas>
+</div>
+
+<div class="container" *ngIf="displayPie">
+  <canvas id="pieChart"></canvas>
+</div>

@@ -26,6 +26,13 @@ export interface TransactionQueryFormData
     commentContains?: string;
 }
 
+export interface TransactionDateToCount
+{
+  date: Date;
+  dateLabel: string;
+  count: number;
+}
+
 @Injectable()
 export class TransactionService {
   myAppUrl: string = "";
@@ -63,6 +70,34 @@ export class TransactionService {
     if (tq.commentContains)
       params = params.set("commentContains", tq.commentContains);
     return params;
+  }
+
+  getDateToCount(tdList: TransactionData[]): TransactionDateToCount[]
+  {
+    if (tdList.length === 0)
+      return [];
+    let counter = new Map<string, number>();
+    let sortedList = tdList.sort((tr1, tr2) => {
+      const t1 = +moment(tr1.modifyDate, this.format);
+      const t2 = +moment(tr2.modifyDate, this.format);
+      return t1 - t2;
+    });
+    for (let transaction of sortedList) {
+      let dateS = moment(transaction.modifyDate, this.format).hours(0).minutes(0).seconds(0)
+        .format(this.format);
+      counter.set(dateS, (counter.get(dateS) || 0) + 1);
+    }
+    let earliest = moment(sortedList[0].modifyDate, this.format).hours(0).minutes(0).seconds(0);
+    let result: TransactionDateToCount[] = [];
+    let today = moment();
+    for (let dt = earliest; dt <= today; dt = dt.add(1, 'd'))
+    {
+      result.push({
+        dateLabel: dt.format("DD/MM/YYYY"), 
+        date: dt.toDate(), 
+        count: counter.get(dt.format(this.format)) || 0});
+    }
+    return result;
   }
 
   getTransactionsByQuery(tq: TransactionQueryFormData)
