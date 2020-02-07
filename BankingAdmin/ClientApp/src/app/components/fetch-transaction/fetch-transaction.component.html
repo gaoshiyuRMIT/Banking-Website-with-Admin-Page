@@ -55,7 +55,26 @@
         </div>
       </div>
     </div>
-    
+
+    <div class="form-group row">
+      <label class="col-form-label col-sm-auto">Transaction Type</label>
+      <div class="col-sm-auto">
+        <select formControlName="transactionType" class="form-control">
+          <option value="">--</option>
+          <option value="Deposit">Deposit</option>
+          <option value="Withdrawal">Withdrawal</option>
+          <option value="Transfer">Transfer</option>
+          <option value="BillPay">BillPay</option>
+          <option value="ServiceCharge">Service Charge</option>
+        </select>
+      </div>
+      <div class="text-danger" *ngIf="transactionType.invalid && formDir.submitted">
+        <div>
+          Invalid input.
+        </div>
+      </div>
+    </div>
+
     <div>
       <button type="submit" class="btn btn-primary">Search</button>
     </div>
