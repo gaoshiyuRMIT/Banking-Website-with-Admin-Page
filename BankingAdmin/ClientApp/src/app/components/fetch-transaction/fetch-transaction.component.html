@@ -2,7 +2,7 @@
 
 <form #formDir="ngForm" [formGroup]="queryForm" (ngSubmit)="search()">
     <div class="form-group row">
-      <label class="col-form-label col-sm-auto">Transaction ID</label>
+      <label class="col-form-label col-sm-2">Transaction ID</label>
       <div class="col-sm-auto">
         <input type="number" formControlName="transactionId" class="form-control"/>
       </div>
@@ -14,7 +14,7 @@
     </div>
 
     <div class="form-group row">
-      <label class="col-form-label col-sm-auto">Amount</label>
+      <label class="col-form-label col-sm-2">Amount</label>
       <div class="col-sm-auto">
         <input type="number" formControlName="amountFrom" class="form-control"/>
       </div>
@@ -33,7 +33,7 @@
     </div>
   
     <div class="form-group row">
-      <label class="col-form-label col-sm-auto">Account Number</label>
+      <label class="col-form-label col-sm-2">Account Number</label>
       <div class="col-sm-auto">
         <input type="number" formControlName="accountNumber" class="form-control"/>
       </div>
@@ -45,7 +45,7 @@
     </div>
 
     <div class="form-group row">
-      <label class="col-form-label col-sm-auto">Comment</label>
+      <label class="col-form-label col-sm-2">Comment</label>
       <div class="col-sm-auto">
         <input type="text" formControlName="commentContains" class="form-control"/>
       </div>
@@ -57,7 +57,7 @@
     </div>
 
     <div class="form-group row">
-      <label class="col-form-label col-sm-auto">Transaction Type</label>
+      <label class="col-form-label col-sm-2">Transaction Type</label>
       <div class="col-sm-auto">
         <select formControlName="transactionType" class="form-control">
           <option value="">--</option>
@@ -76,7 +76,7 @@
     </div>
 
     <div class="form-group row">
-      <label class="col-form-label col-sm-auto">Last Modified Date</label>
+      <label class="col-form-label col-sm-2">Last Modified Date</label>
       <div class="col-sm-auto">
         <input type="date" formControlName="modifyDateFrom" class="form-control"/>
       </div>
@@ -94,7 +94,7 @@
 
     </div>
 
-    <div>
+    <div class="form-group row">
       <button type="submit" class="btn btn-primary">Search</button>
     </div>
 
@@ -102,19 +102,19 @@
 
 <p *ngIf="!transactionList"><em>Loading...</em></p>
 
-<div *ngIf="transactionList">
+<div *ngIf="transactionList" class="text-center">
   <ul class="nav nav-tabs">
-    <li class="nav-item">
-      <a class="nav-link" (click)="showTable()">Table</a>
+    <li class="nav-item col-sm">
+      <a class="nav-link" (click)="showTable()" [class.active]="displayList">Table</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" (click)="showBar()">Bar Chart</a>
+    <li class="nav-item col-sm">
+      <a class="nav-link" (click)="showBar()" [class.active]="displayBar">Bar Chart</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" (click)="showLine()">Line Chart</a>
+    <li class="nav-item col-sm">
+      <a class="nav-link" (click)="showLine()" [class.active]="displayLine">Line Chart</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" (click)="showPie()">Pie Chart</a>
+    <li class="nav-item col-sm">
+      <a class="nav-link" (click)="showPie()" [class.active]="displayPie">Pie Chart</a>
     </li>
   </ul>
 </div>
