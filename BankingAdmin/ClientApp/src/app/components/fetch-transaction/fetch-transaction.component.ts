@@ -23,7 +23,7 @@ export class FetchTransactionComponent {
           this.transactionList = data;
           this.transactionList.forEach((val, idx, arr) => 
             arr[idx] = this._transactionService.transformTransactionData(val)); 
-          this.createCharts();        
+          this.createCharts();
         },
         error => console.error(error));
       this.queryForm = this.createFormGroup();
@@ -42,21 +42,36 @@ export class FetchTransactionComponent {
       });
     }
 
+    showTable() {
+        this.option = FetchTransactionOption.list;
+    }
+
+    showBar() {
+        this.option = FetchTransactionOption.barChart;
+    }
+
+    showLine() {
+        this.option = FetchTransactionOption.lineChart;
+    }
+
+    showPie() {
+        this.option = FetchTransactionOption.pieChart;
+    }
+
     get displayList(): boolean {
-      // return this.option === FetchTransactionOption.list;
-      return true;
+      return this.option === FetchTransactionOption.list;
     }
 
     get displayBar() {
-      return true;
+      return this.option === FetchTransactionOption.barChart;
     }
 
     get displayLine() {
-      return true;
+      return this.option === FetchTransactionOption.lineChart;
     }
 
     get displayPie() {
-      return true;
+      return this.option === FetchTransactionOption.pieChart;
     }
 
     get transactionId() {
