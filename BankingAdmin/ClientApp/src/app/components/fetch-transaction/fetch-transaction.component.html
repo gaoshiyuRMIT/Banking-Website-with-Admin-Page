@@ -1,26 +1,45 @@
 <h1>Transactions</h1>
 
-<table class="table" *ngIf="transactionList">
-    <thead>
-      <tr>
-        <td>ID</td>
-        <td>Type</td>
-        <td>Account</td>
-        <td>Destination Account</td>
-        <td>Amount</td>
-        <td>Comment</td>
-        <td>Last Modified Date</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let transaction of transactionList">
-        <td>{{transaction.transactionID}}</td>
-        <td>{{transaction.transactionType}}</td>
-        <td>{{transaction.accountNumber}}</td>
-        <td>{{transaction.destAccountNumber}}</td>
-        <td>{{transaction.amount}}</td>
-        <td>{{transaction.comment}}</td>
-        <td>{{transaction.modifyDate}}</td>
-      </tr>
-    </tbody>
-  </table>
+<form #formDir="ngForm" [formGroup]="queryForm" (ngSubmit)="search()">
+    <div class="form-group row">
+      <label class="col-form-label col-sm-auto">Transaction ID</label>
+      <div class="col-sm-auto">
+        <input type="number" formControlName="transactionId" class="form-control"/>
+      </div>
+      <div class="text-danger" *ngIf="transactionId.invalid && formDir.submitted">
+        <div *ngIf="transactionId.errors.max || transactionId.errors.min">
+          Must be exactly 4 digits long.
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+<div *ngIf="displayList">
+    <p *ngIf="!transactionList"><em>Loading...</em></p>
+
+    <table class="table" *ngIf="transactionList">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Type</td>
+            <td>Account</td>
+            <td>Destination Account</td>
+            <td>Amount</td>
+            <td>Comment</td>
+            <td>Last Modified Date</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let transaction of transactionList">
+            <td>{{transaction.transactionID}}</td>
+            <td>{{transaction.transactionType}}</td>
+            <td>{{transaction.accountNumber}}</td>
+            <td>{{transaction.destAccountNumber}}</td>
+            <td>{{transaction.amount}}</td>
+            <td>{{transaction.comment}}</td>
+            <td>{{transaction.modifyDate}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

@@ -47,21 +47,21 @@ export class TransactionService {
   {
     let params = new HttpParams();
     if (tq.transactionId)
-      params.set("transactionId", tq.transactionId + "");
+      params = params.set("transactionId", tq.transactionId + "");
     if (tq.transactionType)
-      params.set("transactionType", tq.transactionType);
+      params = params.set("transactionType", tq.transactionType);
     if (tq.modifyDateFrom)
-      params.set("modifyDateFrom", moment(tq.modifyDateFrom).utc().format(this.format));
+      params = params.set("modifyDateFrom", moment(tq.modifyDateFrom).utc().format(this.format));
     if (tq.modifyDateTo)
-      params.set("modifyDateTo", moment(tq.modifyDateTo).utc().format(this.format));
+      params = params.set("modifyDateTo", moment(tq.modifyDateTo).utc().format(this.format));
     if (tq.accountNumber)
-      params.set("accountNumber", tq.accountNumber + "");
+      params = params.set("accountNumber", tq.accountNumber + "");
     if (tq.amountFrom)
-      params.set("amountFrom", tq.amountFrom + "");
+      params = params.set("amountFrom", tq.amountFrom + "");
     if (tq.amountTo)
-      params.set("amountTo", tq.amountTo + "");
+      params = params.set("amountTo", tq.amountTo + "");
     if (tq.commentContains)
-      params.set("commentContains", tq.commentContains);
+      params = params.set("commentContains", tq.commentContains);
     return params;
   }
 

@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class FetchTransactionComponent {
     transactionList: TransactionData[];
     queryForm: FormGroup;
-    option: FetchCustomerOption = FetchCustomerOption.list;
+    option: FetchTransactionOption = FetchTransactionOption.list;
 
     constructor(private _transactionService: TransactionService, private _avRoute: ActivatedRoute,
       private _router: Router, private _fb: FormBuilder) {
@@ -21,7 +21,7 @@ export class FetchTransactionComponent {
         data => this.transactionList = data,
         error => console.error(error));
       this.queryForm = _fb.group({
-        transactionId: [null],
+        transactionId: [null, [Validators.min(0), Validators.max(9999)]],
         modifyDateFrom: [null],
         modifyDateTo: [null],
         transactionType: [null],
@@ -31,9 +31,52 @@ export class FetchTransactionComponent {
         commentContains: [null]
       });
     }
+
+    get displayList(): boolean {
+      return this.option === FetchTransactionOption.list;
+    }
+
+    get transactionId() {
+      return this.queryForm.get("transactionId");
+    }
+
+    get modifyDateFrom() {
+      return this.queryForm.get("modifyDateFrom");
+    }
+
+    get modifyDateTo() {
+      return this.queryForm.get("modifyDateTo");
+    }
+
+    get transactionType() {
+      return this.queryForm.get("transactionType");
+    }
+
+    get accountNumber() {
+      return this.queryForm.get("accountNumber");
+    }
+
+    get amountFrom() {
+      return this.queryForm.get("amountFrom");
+    }
+
+    get amountTo() {
+      return this.queryForm.get("amountTo");
+    }
+
+    get commentContains() {
+      return this.queryForm.get("commentContains");
+    }
+
+    search() {
+      this._transactionService.getTransactionsByQuery(this.queryForm.value).subscribe(
+        data => this.transactionList = data,
+        error => console.error(error)
+      );
+    }
   }
 
-export enum FetchCustomerOption {
+export enum FetchTransactionOption {
   list = "list", 
   pieChart = "pie", 
   lineChart = "line", 
