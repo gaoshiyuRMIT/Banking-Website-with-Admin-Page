@@ -1,19 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
-
-import { transactionHistoryService } from './services/TransacitonHistory.service';
-import { transactionHistoryComponent } from './transaction-history/transaction-history.component';
-
-
 
 import {CustomerService} from './services/customer.service';
 import { FetchCustomerComponent } from './components/fetch-customer/fetch-customer.component';
@@ -31,12 +24,9 @@ import {FetchTransactionComponent} from './components/fetch-transaction/fetch-tr
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     FetchCustomerComponent,
     FetchCustomerDetailComponent,
     EditCustomerDetailComponent,
-    transactionHistoryComponent,
     FetchBillPayComponent,
     FetchTransactionComponent,
   ],
@@ -47,18 +37,14 @@ import {FetchTransactionComponent} from './components/fetch-transaction/fetch-tr
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
       { path: 'fetch-customer', component: FetchCustomerComponent },
       {path: 'fetch-customer-detail/:id', component: FetchCustomerDetailComponent},
       {path: 'edit-customer-detail/:id', component: EditCustomerDetailComponent},
       {path: 'fetch-billpay', component: FetchBillPayComponent},
-        { path: 'transaction-history', component: transactionHistoryComponent },
-        {path: 'fetch-transaction', component: FetchTransactionComponent},
-
+      {path: 'fetch-transaction', component: FetchTransactionComponent},
     ])
   ],
-  providers: [CustomerService, BillPayService, transactionHistoryService, TransactionService],
+  providers: [CustomerService, BillPayService, TransactionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
