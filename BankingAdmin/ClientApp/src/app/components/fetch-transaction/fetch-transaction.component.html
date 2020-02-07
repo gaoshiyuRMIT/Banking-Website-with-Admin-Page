@@ -11,9 +11,8 @@
           Must be exactly 4 digits long.
         </div>
       </div>
-      <button type="submit" class="btn btn-primary">Search</button>
     </div>
-    
+
     <div class="form-group row">
       <label class="col-form-label col-sm-auto">Amount</label>
       <div class="col-sm-auto">
@@ -23,14 +22,31 @@
       <div class="col-sm-auto">
         <input type="number" formControlName="amountTo" class="form-control"/>
       </div>
-      <div class="text-danger" *ngIf="transactionId.invalid && formDir.submitted">
-          <div *ngIf="transactionId.errors.max || transactionId.errors.min">
-          Must be exactly 4 digits long.
-          </div>
+      <div class="text-danger col-sm-auto" *ngIf="(amountFrom.invalid || amountTo.invalid) && formDir.submitted">
+        <div *ngIf="amountFrom.errors.min || amountTo.errors.min">
+          Must be greater than or equal to 0.
+        </div>
       </div>
-      <button type="submit" class="btn btn-primary">Search</button>
+      <div class="text-danger col-sm-auto" *ngIf="formDir.submitted && amountFrom.value && amountTo.value && amountFrom.value > amountTo.value">
+        Invalid range.
+      </div>
     </div>
   
+    <div class="form-group row">
+      <label class="col-form-label col-sm-auto">Account Number</label>
+      <div class="col-sm-auto">
+        <input type="number" formControlName="accountNumber" class="form-control"/>
+      </div>
+      <div class="text-danger" *ngIf="accountNumber.invalid && formDir.submitted">
+        <div *ngIf="accountNumber.errors.max || accountNumber.errors.min">
+          Must be exactly 4 digits long.
+        </div>
+      </div>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+
 </form>
 
 <div *ngIf="displayList">

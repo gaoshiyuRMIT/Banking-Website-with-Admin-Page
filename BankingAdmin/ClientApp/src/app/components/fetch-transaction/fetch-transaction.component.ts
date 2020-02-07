@@ -20,7 +20,11 @@ export class FetchTransactionComponent {
       this._transactionService.getTransactionsByQuery({}).subscribe(
         data => this.transactionList = data,
         error => console.error(error));
-      this.queryForm = _fb.group({
+      this.queryForm = this.createFormGroup();
+    }
+
+    createFormGroup(): FormGroup {
+      return this._fb.group({
         transactionId: [null, [Validators.min(0), Validators.max(9999)]],
         modifyDateFrom: [null],
         modifyDateTo: [null],
@@ -70,7 +74,9 @@ export class FetchTransactionComponent {
 
     search() {
       this._transactionService.getTransactionsByQuery(this.queryForm.value).subscribe(
-        data => this.transactionList = data,
+        data => {
+          this.transactionList = data; 
+        },
         error => console.error(error)
       );
     }
