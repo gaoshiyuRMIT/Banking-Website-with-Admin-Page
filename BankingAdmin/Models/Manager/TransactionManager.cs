@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using BankingLib.Data;
 using BankingLib.Models;
+using BankingLib.Extensions;
 using BankingAdmin.Models.Repository;
 
 namespace BankingAdmin.Models.Manager
@@ -14,13 +15,17 @@ namespace BankingAdmin.Models.Manager
     public class TransactionQuery
     {
         public int? TransactionId { get; set; }
-        public DateTime? ModifyDateFrom { get; set; }
-        public DateTime? ModifyDateTo { get; set; }
+        public string ModifyDateFrom { get; set; }
+        public string ModifyDateTo { get; set; }
         public TransactionType? TransactionType { get; set; }
         public int? AccountNumber { get; set; }
         public decimal? AmountFrom { get; set; }
         public decimal? AmountTo { get; set; }
         public string CommentContains { get;set; }
+
+        public DateTime? ModifyDateFromDT => ModifyDateFrom?.ToDateTime();
+        public DateTime? ModifyDateToDT => ModifyDateTo?.ToDateTime();
+
     }
 
     public class TransactionManager : IAsyncSearchRepository<Transaction, TransactionQuery>
@@ -39,10 +44,10 @@ namespace BankingAdmin.Models.Manager
             List<Expression<Func<Transaction, bool>>> predicates = new List<Expression<Func<Transaction, bool>>>();
             if (query.TransactionId != null)
                 predicates.Add(x => x.TransactionID == query.TransactionId.Value);
-            if (query.ModifyDateFrom != null)
-                predicates.Add(x => x.ModifyDate >= query.ModifyDateFrom.Value);
-            if (query.ModifyDateTo != null)
-                predicates.Add(x => x.ModifyDate <= query.ModifyDateTo.Value);
+            if (query.ModifyDateFromDT != null)
+                predicates.Add(x => x.ModifyDate >= query.ModifyDateFromDT.Value);
+            if (query.ModifyDateToDT != null)
+                predicates.Add(x => x.ModifyDate <= query.ModifyDateToDT.Value);
             if (query.TransactionType != null)
                 predicates.Add(x => x.TransactionType == query.TransactionType.Value);
             if (query.AccountNumber != null)

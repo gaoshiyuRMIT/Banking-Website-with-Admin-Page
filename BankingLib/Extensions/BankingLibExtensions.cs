@@ -1,10 +1,26 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Globalization;
 
 using BankingLib.Models;
 
 namespace BankingLib.Extensions
 {
+    public static class StringExtensions
+    {
+        const string dtFormat = "dd/MM/yyyy hh:mm:ss tt";
+        public static DateTime? ToDateTime(this string dts)
+        {
+            if(string.IsNullOrEmpty(dts.Trim()))
+                return null;
+            try {
+                return DateTime.ParseExact(dts, dtFormat, CultureInfo.InvariantCulture);
+            } catch (FormatException) {
+                return null;
+            }
+        }
+    }
+
     public static class DateTimeExtensions
     {
         public static DateTime SpecifySecond(this DateTime dt, int newSecond)

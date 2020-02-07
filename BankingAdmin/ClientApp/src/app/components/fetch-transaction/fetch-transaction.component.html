@@ -75,6 +75,21 @@
       </div>
     </div>
 
+    <div class="form-group row">
+      <label class="col-form-label col-sm-auto">Last Modified Date</label>
+      <div class="col-sm-auto">
+        <input type="date" formControlName="modifyDateFrom" class="form-control"/>
+      </div>
+      ~
+      <div class="col-sm-auto">
+        <input type="date" formControlName="modifyDateTo" class="form-control"/>
+      </div>
+
+      <div class="text-danger" *ngIf="(modifyDateFrom.invalid || modifyDateTo.invalid) && formDir.submitted">
+        Invalid date range.
+      </div>
+    </div>
+
     <div>
       <button type="submit" class="btn btn-primary">Search</button>
     </div>
