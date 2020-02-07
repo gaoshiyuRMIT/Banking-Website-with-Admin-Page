@@ -1,0 +1,130 @@
+<h1>Transactions</h1>
+
+<form #formDir="ngForm" [formGroup]="queryForm" (ngSubmit)="search()">
+    <div class="form-group row">
+      <label class="col-form-label col-sm-auto">Transaction ID</label>
+      <div class="col-sm-auto">
+        <input type="number" formControlName="transactionId" class="form-control"/>
+      </div>
+      <div class="text-danger" *ngIf="transactionId.invalid && formDir.submitted">
+        <div *ngIf="transactionId.errors.max || transactionId.errors.min">
+          Must be exactly 4 digits long.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-form-label col-sm-auto">Amount</label>
+      <div class="col-sm-auto">
+        <input type="number" formControlName="amountFrom" class="form-control"/>
+      </div>
+      ~
+      <div class="col-sm-auto">
+        <input type="number" formControlName="amountTo" class="form-control"/>
+      </div>
+      <div class="text-danger col-sm-auto" *ngIf="(amountFrom.invalid || amountTo.invalid) && formDir.submitted">
+        <div *ngIf="amountFrom.errors.min || amountTo.errors.min">
+          Must be greater than or equal to 0.
+        </div>
+      </div>
+      <div class="text-danger col-sm-auto" *ngIf="formDir.submitted && amountFrom.value && amountTo.value && amountFrom.value > amountTo.value">
+        Invalid range.
+      </div>
+    </div>
+  
+    <div class="form-group row">
+      <label class="col-form-label col-sm-auto">Account Number</label>
+      <div class="col-sm-auto">
+        <input type="number" formControlName="accountNumber" class="form-control"/>
+      </div>
+      <div class="text-danger" *ngIf="accountNumber.invalid && formDir.submitted">
+        <div *ngIf="accountNumber.errors.max || accountNumber.errors.min">
+          Must be exactly 4 digits long.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-form-label col-sm-auto">Comment</label>
+      <div class="col-sm-auto">
+        <input type="text" formControlName="commentContains" class="form-control"/>
+      </div>
+      <div class="text-danger" *ngIf="commentContains.invalid && formDir.submitted">
+        <div>
+          Invalid input.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-form-label col-sm-auto">Transaction Type</label>
+      <div class="col-sm-auto">
+        <select formControlName="transactionType" class="form-control">
+          <option value="">--</option>
+          <option value="Deposit">Deposit</option>
+          <option value="Withdrawal">Withdrawal</option>
+          <option value="Transfer">Transfer</option>
+          <option value="BillPay">BillPay</option>
+          <option value="ServiceCharge">Service Charge</option>
+        </select>
+      </div>
+      <div class="text-danger" *ngIf="transactionType.invalid && formDir.submitted">
+        <div>
+          Invalid input.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-form-label col-sm-auto">Last Modified Date</label>
+      <div class="col-sm-auto">
+        <input type="date" formControlName="modifyDateFrom" class="form-control"/>
+      </div>
+      ~
+      <div class="col-sm-auto">
+        <input type="date" formControlName="modifyDateTo" class="form-control"/>
+      </div>
+
+      <div class="text-danger" *ngIf="(modifyDateFrom.invalid || modifyDateTo.invalid) && formDir.submitted">
+        Invalid date range.
+      </div>
+      <div class="text-danger" *ngIf="modifyDateFrom.value && modifyDateTo.value && (modifyDateFrom.value > modifyDateTo.value) && formDir.submitted">
+        Invalid date range.
+      </div>
+
+    </div>
+
+    <div>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+
+</form>
+
+<div *ngIf="displayList">
+    <p *ngIf="!transactionList"><em>Loading...</em></p>
+
+    <table class="table" *ngIf="transactionList">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Type</td>
+            <td>Account</td>
+            <td>Destination Account</td>
+            <td>Amount</td>
+            <td>Comment</td>
+            <td>Last Modified Date</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let transaction of transactionList">
+            <td>{{transaction.transactionID}}</td>
+            <td>{{transaction.transactionType}}</td>
+            <td>{{transaction.accountNumber}}</td>
+            <td>{{transaction.destAccountNumber}}</td>
+            <td>{{transaction.amount}}</td>
+            <td>{{transaction.comment}}</td>
+            <td>{{transaction.modifyDate}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
