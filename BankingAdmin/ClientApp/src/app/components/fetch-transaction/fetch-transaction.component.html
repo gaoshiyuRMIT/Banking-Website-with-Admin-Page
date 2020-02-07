@@ -43,6 +43,19 @@
         </div>
       </div>
     </div>
+
+    <div class="form-group row">
+      <label class="col-form-label col-sm-auto">Comment</label>
+      <div class="col-sm-auto">
+        <input type="text" formControlName="commentContains" class="form-control"/>
+      </div>
+      <div class="text-danger" *ngIf="commentContains.invalid && formDir.submitted">
+        <div>
+          Invalid input.
+        </div>
+      </div>
+    </div>
+    
     <div>
       <button type="submit" class="btn btn-primary">Search</button>
     </div>
