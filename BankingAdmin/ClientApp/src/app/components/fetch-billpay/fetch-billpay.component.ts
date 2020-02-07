@@ -17,7 +17,12 @@ export class FetchBillPayComponent {
 
     getBillPays()
     {
-        this._billpayService.getBillPays().subscribe(data => this.billpayList = data,
+        this._billpayService.getBillPays().subscribe(
+            data => {
+              this.billpayList = data;
+              this.billpayList.forEach((val, idx, arr) =>
+                arr[idx] = this._billpayService.transformBillPayData(val));
+            },
             error => console.error(error));
     }
 
@@ -25,7 +30,7 @@ export class FetchBillPayComponent {
     {
         let index = this.billpayList.findIndex(x => x.billPayID === id);
         this._billpayService.blockById(id).subscribe(
-            data => {this.billpayList[index] = data as BillPayData; console.log(data)},
+            data => {this.billpayList[index] = this._billpayService.transformBillPayData(data as BillPayData);},
             error => console.error(error));
     }
 
@@ -33,7 +38,7 @@ export class FetchBillPayComponent {
     {
         let index = this.billpayList.findIndex(x => x.billPayID === id);
         this._billpayService.unblockById(id).subscribe(
-            data => {this.billpayList[index] = data as BillPayData; console.log(data)},
+            data => {this.billpayList[index] = this._billpayService.transformBillPayData(data as BillPayData);},
             error => console.error(error));
     }
 }
