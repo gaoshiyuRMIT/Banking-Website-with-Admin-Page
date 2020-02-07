@@ -100,8 +100,26 @@
 
 </form>
 
-<div *ngIf="displayList">
-    <p *ngIf="!transactionList"><em>Loading...</em></p>
+<p *ngIf="!transactionList"><em>Loading...</em></p>
+
+<div *ngIf="transactionList">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" (click)="showTable()">Table</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="showBar()">Bar Chart</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="showLine()">Line Chart</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="showPie()">Pie Chart</a>
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="displayList" class="container">
 
     <table class="table" *ngIf="transactionList">
         <thead>
@@ -127,4 +145,16 @@
         </tr>
         </tbody>
     </table>
+</div>
+
+<div class="container" [style.display]="displayBar ? 'block' : 'none'">
+  <canvas id="barChart"></canvas>
+</div>
+
+<div class="container" [style.display]="displayLine ? 'block' : 'none'">
+  <canvas id="lineChart"></canvas>
+</div>
+
+<div class="container" [style.display]="displayPie ? 'block' : 'none'">
+  <canvas id="pieChart"></canvas>
 </div>
