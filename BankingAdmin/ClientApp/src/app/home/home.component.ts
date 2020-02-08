@@ -1,13 +1,18 @@
 import { Component } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
+import { LoginService } from '../services/login.service';
+
 
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
+  templateUrl: './home.component.html'
 })
 export class HomeComponent {
-  constructor(private _router: Router) {
-    
+  constructor(private _router: Router, private _loginService: LoginService) {
+    if (_loginService.isLoggedIn)
+      _router.navigate(['/fetch-customer']);
+    else
+      _router.navigate(["/admin-login"]);
   }
 }
