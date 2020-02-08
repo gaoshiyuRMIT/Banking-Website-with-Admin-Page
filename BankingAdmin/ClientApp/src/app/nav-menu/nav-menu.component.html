@@ -25,16 +25,21 @@
                       [routerLinkActiveOptions]="{ exact: true }">
                       <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
                   </li>
-                  <li class="nav-item" [routerLinkActive]="['link-active']">
-                      <a class="nav-link text-dark" [routerLink]="['/fetch-customer']">Fetch Customers</a>
+                  <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="isLoggedIn">
+                    <a class="nav-link text-dark" [routerLink]="['/fetch-customer']">Fetch Customers</a>
                   </li>
-                  <li class="nav-item" [routerLinkActive]="['link-active']">
+                  <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="isLoggedIn">
                       <a class="nav-link text-dark" [routerLink]="['/fetch-billpay']">Fetch Bill Pays</a>
                   </li>
-                  <li class="nav-item" [routerLinkActive]="['link-active']">
+                  <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="isLoggedIn">
                     <a class="nav-link text-dark" [routerLink]="['/fetch-transaction']">Fetch Transactions</a>
                   </li>
-
+                  <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="isLoggedIn">
+                    <a class="nav-link text-dark" [routerLink]="" (click)="logout()">Log out</a>
+                  </li>
+                  <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="!isLoggedIn">
+                    <a class="nav-link text-dark" [routerLink]="['/admin-login']">Log in</a>
+                  </li>
               </ul>
       </div>
     </div>
