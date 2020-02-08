@@ -41,7 +41,9 @@ namespace BankingAdmin.Controllers
         [HttpGet]
         public async Task<IEnumerable<Transaction>> Get([FromQuery] TransactionQuery query)
         {
-            return (await _repo.GetManyByQueryAsync(query)).Select(x => TrimTransaction(x));
+            return (await _repo.GetManyByQueryAsync(query))
+                .OrderByDescending(x => x.ModifyDate)
+                .Select(x => TrimTransaction(x));
         }
         
     }

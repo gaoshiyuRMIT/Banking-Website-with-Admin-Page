@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { HttpParams } from '@angular/common/http';
 import {Chart} from 'chart.js';
 
@@ -42,7 +42,7 @@ export class FetchTransactionComponent {
         amountFrom: [null, Validators.min(0)],
         amountTo: [null, Validators.min(0)],
         commentContains: [null]
-      });
+      }, {validators: [amountRangeValidator, modDateRangeValidator]});
     }
 
     showTable() {
@@ -235,6 +235,8 @@ export class FetchTransactionComponent {
     }
 
     search() {
+      if (!this.queryForm.valid)
+        return;
       this._transactionService.getTransactionsByQuery(this.queryForm.value).subscribe(
         data => {
           this.transactionList = data;
@@ -264,4 +266,16 @@ export enum FetchTransactionOption {
   pieChart = "pie", 
   lineChart = "line", 
   barChart = "bar"
+}
+
+export const amountRangeValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+  const amountFrom = control.get('amountFrom').value;
+  const amountTo = control.get('amountTo').value;
+  return amountFrom && amountTo && amountFrom > amountTo ? { 'amountRange': true } : null;
+};
+
+export const modDateRangeValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+  const dateFrom = control.get("modifyDateFrom").value;
+  const dateTo = control.get("modifyDateTo").value;
+  return dateFrom && dateTo && dateFrom > dateTo ? {'modDateRange': true} : null;
 }

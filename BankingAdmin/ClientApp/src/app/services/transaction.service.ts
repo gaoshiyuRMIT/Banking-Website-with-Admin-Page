@@ -159,7 +159,7 @@ export class TransactionService {
   }
 
   sortTransactionByModifyDate(tdList: TransactionData[]): TransactionData[] {
-    return tdList.sort((tr1, tr2) => {
+    return tdList.concat().sort((tr1, tr2) => {
       const t1 = +moment(tr1.modifyDate, this.format);
       const t2 = +moment(tr2.modifyDate, this.format);
       return t1 - t2;

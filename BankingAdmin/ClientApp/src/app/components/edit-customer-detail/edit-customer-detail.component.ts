@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {Router, ActivatedRoute} from '@angular/router';
 
-import {CustomerService} from '../../services/customer.service';
+import {CustomerService, ausStateValidator} from '../../services/customer.service';
 
 @Component({
   selector: 'app-edit-customer-detail',
@@ -19,14 +19,14 @@ export class EditCustomerDetailComponent implements OnInit {
       this.customerId = _avRoute.snapshot.params["id"];
     this.customerForm = _formBuilder.group({
       customerID: [null, Validators.required],
-      name: ["", Validators.required],
+      name: ["", [Validators.required, Validators.pattern(String.raw`^[a-zA-Z ]+$`)]],
       address: [""],
-      state: [""],
+      state: ["", ausStateValidator()],
       city: [""],
-      postCode: ["", [Validators.maxLength(4), Validators.minLength(4)]],
-      phone: ["", [Validators.required, Validators.maxLength(9), Validators.minLength(9)]],
+      postCode: ["", [Validators.pattern(String.raw`^\d{4}$`)]],
+      phone: ["", [Validators.required, Validators.pattern(String.raw`^\d{9}$`)]],
       tfn: ["", Validators.maxLength(11)],
-    });
+    }, {updateOn: "submit"});
   }
 
   ngOnInit() {
@@ -42,6 +42,14 @@ export class EditCustomerDetailComponent implements OnInit {
   save() {
     if (!this.customerForm.valid)
       return;
+    this.name.setValue(this.name.value || null);
+    this.address.setValue(this.address.value || null);
+    this.state.setValue(this.state.value || null);
+    this.city.setValue(this.city.value || null);
+    this.postCode.setValue(this.postCode.value || null);
+    this.phone.setValue(this.phone.value || null);
+    this.tfn.setValue(this.tfn.value || null);
+
     this._customerService.updateCustomer(this.customerId, this.customerForm.value).subscribe(
       data => this._router.navigate(["/fetch-customer-detail", this.customerId]),
       error => this.errorMessage = error);

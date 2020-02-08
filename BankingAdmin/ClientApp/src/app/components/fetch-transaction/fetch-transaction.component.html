@@ -7,7 +7,7 @@
         <input type="number" formControlName="transactionId" class="form-control"/>
       </div>
       <div class="text-danger" *ngIf="transactionId.invalid && formDir.submitted">
-        <div *ngIf="transactionId.errors.max || transactionId.errors.min">
+        <div *ngIf="transactionId.errors?.max || transactionId.errors?.min">
           Must be exactly 4 digits long.
         </div>
       </div>
@@ -23,13 +23,14 @@
         <input type="number" formControlName="amountTo" class="form-control"/>
       </div>
       <div class="text-danger col-sm-auto" *ngIf="(amountFrom.invalid || amountTo.invalid) && formDir.submitted">
-        <div *ngIf="amountFrom.errors.min || amountTo.errors.min">
+        <div *ngIf="amountFrom.errors?.min || amountTo.errors?.min">
           Must be greater than or equal to 0.
         </div>
       </div>
-      <div class="text-danger col-sm-auto" *ngIf="formDir.submitted && amountFrom.value && amountTo.value && amountFrom.value > amountTo.value">
+      <div *ngIf="formDir.submitted && queryForm.errors?.amountRange" class="text-danger">
         Invalid range.
       </div>
+
     </div>
   
     <div class="form-group row">
@@ -38,7 +39,7 @@
         <input type="number" formControlName="accountNumber" class="form-control"/>
       </div>
       <div class="text-danger" *ngIf="accountNumber.invalid && formDir.submitted">
-        <div *ngIf="accountNumber.errors.max || accountNumber.errors.min">
+        <div *ngIf="accountNumber.errors?.max || accountNumber.errors?.min">
           Must be exactly 4 digits long.
         </div>
       </div>
@@ -85,15 +86,10 @@
         <input type="date" formControlName="modifyDateTo" class="form-control"/>
       </div>
 
-      <div class="text-danger" *ngIf="(modifyDateFrom.invalid || modifyDateTo.invalid) && formDir.submitted">
+      <div *ngIf="formDir.submitted && queryForm.errors?.modDateRange" class="text-danger">
         Invalid date range.
       </div>
-      <div class="text-danger" *ngIf="modifyDateFrom.value && modifyDateTo.value && (modifyDateFrom.value > modifyDateTo.value) && formDir.submitted">
-        Invalid date range.
-      </div>
-
     </div>
-
     <div class="form-group row">
       <button type="submit" class="btn btn-primary">Search</button>
     </div>

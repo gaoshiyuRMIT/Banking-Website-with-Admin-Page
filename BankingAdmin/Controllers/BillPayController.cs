@@ -39,7 +39,7 @@ namespace BankingAdmin.Controllers
         public async Task<IEnumerable<BillPay>> Get()
         {
             var billPays = await _repo.GetAllAsync();
-            return billPays.Select(x => TrimBillPay(x));
+            return billPays.OrderByDescending(x => x.BillPayID).Select(x => TrimBillPay(x));
         }
 
         [HttpGet("{billPayId}")]
