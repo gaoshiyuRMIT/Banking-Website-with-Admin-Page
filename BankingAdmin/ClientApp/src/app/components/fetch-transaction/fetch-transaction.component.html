@@ -105,16 +105,16 @@
 <div *ngIf="transactionList" class="text-center">
   <ul class="nav nav-tabs">
     <li class="nav-item col-sm">
-      <a class="nav-link" (click)="showTable()" [class.active]="displayList">Table</a>
+      <a class="nav-link" [routerLink]="" (click)="showTable()" [class.active]="displayList">Table</a>
     </li>
     <li class="nav-item col-sm">
-      <a class="nav-link" (click)="showBar()" [class.active]="displayBar">Bar Chart</a>
+      <a class="nav-link" [routerLink]="" (click)="showBar()" [class.active]="displayBar">Bar Chart</a>
     </li>
     <li class="nav-item col-sm">
-      <a class="nav-link" (click)="showLine()" [class.active]="displayLine">Line Chart</a>
+      <a class="nav-link" [routerLink]="" (click)="showLine()" [class.active]="displayLine">Line Chart</a>
     </li>
     <li class="nav-item col-sm">
-      <a class="nav-link" (click)="showPie()" [class.active]="displayPie">Pie Chart</a>
+      <a class="nav-link" [routerLink]="" (click)="showPie()" [class.active]="displayPie">Pie Chart</a>
     </li>
   </ul>
 </div>

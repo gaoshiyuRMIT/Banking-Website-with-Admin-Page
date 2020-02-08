@@ -16,7 +16,8 @@ import {FetchBillPayComponent} from './components/fetch-billpay/fetch-billpay.co
 import { BillPayService } from './services/billpay.service';
 import {TransactionService} from './services/transaction.service';
 import {FetchTransactionComponent} from './components/fetch-transaction/fetch-transaction.component';
-
+import {LoginService, AuthGuard} from "./services/login.service";
+import {AdminLoginComponent} from "./components/admin-login/admin-login.component";
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import {FetchTransactionComponent} from './components/fetch-transaction/fetch-tr
     EditCustomerDetailComponent,
     FetchBillPayComponent,
     FetchTransactionComponent,
+    AdminLoginComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -37,14 +39,15 @@ import {FetchTransactionComponent} from './components/fetch-transaction/fetch-tr
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'fetch-customer', component: FetchCustomerComponent },
-      {path: 'fetch-customer-detail/:id', component: FetchCustomerDetailComponent},
-      {path: 'edit-customer-detail/:id', component: EditCustomerDetailComponent},
-      {path: 'fetch-billpay', component: FetchBillPayComponent},
-      {path: 'fetch-transaction', component: FetchTransactionComponent},
+      { path: 'fetch-customer', component: FetchCustomerComponent, canActivate : [AuthGuard] },
+      {path: 'fetch-customer-detail/:id', component: FetchCustomerDetailComponent,canActivate : [AuthGuard]},
+      {path: 'edit-customer-detail/:id', component: EditCustomerDetailComponent,canActivate : [AuthGuard]},
+      {path: 'fetch-billpay', component: FetchBillPayComponent,canActivate : [AuthGuard]},
+      {path: 'fetch-transaction', component: FetchTransactionComponent,canActivate : [AuthGuard]},
+      {path: 'admin-login', component: AdminLoginComponent},
     ])
   ],
-  providers: [CustomerService, BillPayService, TransactionService],
+  providers: [CustomerService, BillPayService, TransactionService, LoginService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

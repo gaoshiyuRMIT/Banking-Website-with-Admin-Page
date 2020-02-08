@@ -19,6 +19,12 @@ namespace BankingAdmin.Controllers
             _repo = repo;
         }
 
+        [HttpGet("admin")]
+        public async Task<bool> LoginAdmin(string userName, string password)
+        {
+            return userName == "admin" && password == "admin";
+        }
+
         [HttpPut("lock/customer/{customerId}")]
         public async Task<bool> LockLogin(int customerId)
         {
