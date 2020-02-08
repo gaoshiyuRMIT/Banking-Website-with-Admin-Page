@@ -19,12 +19,12 @@ export class EditCustomerDetailComponent implements OnInit {
       this.customerId = _avRoute.snapshot.params["id"];
     this.customerForm = _formBuilder.group({
       customerID: [null, Validators.required],
-      name: ["", Validators.required],
+      name: ["", [Validators.required, Validators.pattern(String.raw`^[a-zA-Z ]+$`)]],
       address: [""],
       state: ["", ausStateValidator()],
       city: [""],
       postCode: ["", [Validators.pattern(String.raw`^\d{4}$`)]],
-      phone: ["", [Validators.required, Validators.maxLength(9), Validators.minLength(9)]],
+      phone: ["", [Validators.required, Validators.pattern(String.raw`^\d{9}$`)]],
       tfn: ["", Validators.maxLength(11)],
     });
   }
