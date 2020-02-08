@@ -1,5 +1,6 @@
 import { Injectable, Inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import {ValidatorFn, AbstractControl} from '@angular/forms';
 
 export interface CustomerData {
     customerID: number;
@@ -89,4 +90,12 @@ export class CustomerService {
   {
     return this._http.delete(this.myAppUrl + "api/Customer/Delete/" + id);
   }
+}
+
+export function ausStateValidator(): ValidatorFn {
+  return (control: AbstractControl): {[key: string]: any} | null => {
+    if (!["NSW", "QLD", "SA", "TAS", "VIC", "WA", "ACT", "NT"].includes(control.value))
+      return {'ausState': {value: control.value}};
+    return null;
+  };
 }

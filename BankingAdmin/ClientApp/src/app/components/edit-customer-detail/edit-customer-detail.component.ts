@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {Router, ActivatedRoute} from '@angular/router';
 
-import {CustomerService} from '../../services/customer.service';
+import {CustomerService, ausStateValidator} from '../../services/customer.service';
 
 @Component({
   selector: 'app-edit-customer-detail',
@@ -21,9 +21,9 @@ export class EditCustomerDetailComponent implements OnInit {
       customerID: [null, Validators.required],
       name: ["", Validators.required],
       address: [""],
-      state: [""],
+      state: ["", ausStateValidator()],
       city: [""],
-      postCode: ["", [Validators.maxLength(4), Validators.minLength(4)]],
+      postCode: ["", [Validators.pattern(String.raw`^\d{4}$`)]],
       phone: ["", [Validators.required, Validators.maxLength(9), Validators.minLength(9)]],
       tfn: ["", Validators.maxLength(11)],
     });
