@@ -6,6 +6,7 @@ import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-home',
+  templateUrl: './home.component.html'
 })
 export class HomeComponent {
   constructor(private _router: Router, private _loginService: LoginService) {
