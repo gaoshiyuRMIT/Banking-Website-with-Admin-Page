@@ -38,7 +38,7 @@ namespace Banking
             {
                 // Make the session cookie essential.
                 options.Cookie.IsEssential = true;
-                options.IdleTimeout = TimeSpan.FromMinutes(10);
+                options.IdleTimeout = TimeSpan.FromMinutes(1);
             });
             services.AddScoped<IAccountManager, AccountManager>();
             services.AddScoped<ICustomerManager, CustomerManager>();
