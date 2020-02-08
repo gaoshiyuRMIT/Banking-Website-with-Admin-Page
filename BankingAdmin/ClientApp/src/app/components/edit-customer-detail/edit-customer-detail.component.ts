@@ -26,7 +26,7 @@ export class EditCustomerDetailComponent implements OnInit {
       postCode: ["", [Validators.pattern(String.raw`^\d{4}$`)]],
       phone: ["", [Validators.required, Validators.pattern(String.raw`^\d{9}$`)]],
       tfn: ["", Validators.maxLength(11)],
-    });
+    }, {updateOn: "submit"});
   }
 
   ngOnInit() {
@@ -42,6 +42,14 @@ export class EditCustomerDetailComponent implements OnInit {
   save() {
     if (!this.customerForm.valid)
       return;
+    this.name.setValue(this.name.value || null);
+    this.address.setValue(this.address.value || null);
+    this.state.setValue(this.state.value || null);
+    this.city.setValue(this.city.value || null);
+    this.postCode.setValue(this.postCode.value || null);
+    this.phone.setValue(this.phone.value || null);
+    this.tfn.setValue(this.tfn.value || null);
+
     this._customerService.updateCustomer(this.customerId, this.customerForm.value).subscribe(
       data => this._router.navigate(["/fetch-customer-detail", this.customerId]),
       error => this.errorMessage = error);
