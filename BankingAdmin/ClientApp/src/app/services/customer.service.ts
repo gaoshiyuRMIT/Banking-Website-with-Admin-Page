@@ -94,7 +94,7 @@ export class CustomerService {
 
 export function ausStateValidator(): ValidatorFn {
   return (control: AbstractControl): {[key: string]: any} | null => {
-    if (!["NSW", "QLD", "SA", "TAS", "VIC", "WA", "ACT", "NT"].includes(control.value))
+    if (control.value && !["NSW", "QLD", "SA", "TAS", "VIC", "WA", "ACT", "NT"].includes(control.value))
       return {'ausState': {value: control.value}};
     return null;
   };
