@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using BankingLib.Models;
 using Banking.Models;
 using Banking.ViewModels;
+using Microsoft.AspNetCore.Diagnostics;
 
 namespace Banking.Controllers
 {
@@ -28,10 +29,20 @@ namespace Banking.Controllers
             return RedirectToAction("Index", "Customer");
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Error(int? errorCode)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var viewModel = new ErrorViewModel();
+            if (errorCode == null)
+            {
+                var exceptionHandlerPathFeature =
+                    HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+                if (exceptionHandlerPathFeature?.Error is Exception)
+                    viewModel.Code = 500;
+            }
+            else 
+                viewModel.Code = errorCode.Value;
+            return View(viewModel);
         }
+
     }
 }
