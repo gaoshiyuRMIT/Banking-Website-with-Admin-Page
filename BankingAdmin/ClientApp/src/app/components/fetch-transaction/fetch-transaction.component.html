@@ -97,6 +97,7 @@
 </form>
 
 <p *ngIf="!transactionList"><em>Loading...</em></p>
+<p *ngIf="transactionList"><strong>Total Results: {{transactionList.length}}</strong></p>
 
 <div *ngIf="transactionList" class="text-center">
   <ul class="nav nav-tabs">
