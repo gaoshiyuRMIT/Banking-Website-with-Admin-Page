@@ -73,7 +73,7 @@ export class TransactionService {
     if (tq.modifyDateFrom)
       params = params.set("modifyDateFrom", moment(tq.modifyDateFrom).utc().format(this.format));
     if (tq.modifyDateTo)
-      params = params.set("modifyDateTo", moment(tq.modifyDateTo).utc().format(this.format));
+      params = params.set("modifyDateTo", moment(tq.modifyDateTo).hours(23).minutes(59).seconds(59).utc().format(this.format));
     if (tq.accountNumber)
       params = params.set("accountNumber", tq.accountNumber + "");
     if (tq.amountFrom)
