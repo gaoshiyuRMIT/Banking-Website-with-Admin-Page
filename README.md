@@ -1,4 +1,7 @@
 # a3-s3734720-s3596621
+## Group Info (#14)
+- s3734720 Shiyu Gao
+- s3596621 Jinming Liu
 
 ## Reference
 - Week9 tutorial sample code "WebApi" by Matthew Bolger
