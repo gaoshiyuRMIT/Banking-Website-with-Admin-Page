@@ -24,6 +24,8 @@ export class FetchCustomerComponent {
   }
 
   search() {
+    if (!this.customerIdForm.valid)
+      return;
     if (this.customerId.value !== null)
       this._customerService.getCustomerById(this.customerId.value).subscribe(
         data => {

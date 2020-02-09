@@ -30,6 +30,8 @@ export class AdminLoginComponent {
     }
     
     submit() {
+      if (!this.loginForm.valid)
+        return;
       this._loginService.login(this.userName.value, this.password.value).subscribe(
         success => {
           if (success) {
