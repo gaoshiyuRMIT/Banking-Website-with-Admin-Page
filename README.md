@@ -1,4 +1,4 @@
-# a3-s3734720-s3596621
+# Banking Website with Admin Page
 ## Group Info (#14)
 - s3734720 Shiyu Gao
 - s3596621 Jinming Liu
