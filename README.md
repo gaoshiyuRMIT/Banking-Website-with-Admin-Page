@@ -1,5 +1,9 @@
 # Banking Website with Admin Page
-### RMIT Web Development Technologies (COSC2277), Flexible Term 2020, assignment 3
+RMIT Web Development Technologies (COSC2277), Flexible Term 2020, assignment 3
+
+## Requirements Specification
+https://drive.google.com/file/d/19JfWpXL6KL8Xq_tKGPln7LQL9xaur0MD/view?usp=sharing
+
 ## Group Info (#14)
 - s3734720 Shiyu Gao
 - s3596621 Jinming Liu
