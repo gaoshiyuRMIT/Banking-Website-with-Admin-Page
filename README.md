@@ -2,9 +2,9 @@
 RMIT Web Development Technologies (COSC2277), Flexible Term 2020, assignment 3
 
 ## Requirements Specification
-part 1: https://drive.google.com/file/d/132hyg-dzEAWxYjtYIG2uEdFpWkgzuB2M/view?usp=sharing
-part 2: https://drive.google.com/file/d/1JpWbNAd2ccOZrnz04y8mDGAK-TkWmib0/view?usp=sharing
-part 3: https://drive.google.com/file/d/19JfWpXL6KL8Xq_tKGPln7LQL9xaur0MD/view?usp=sharing
+- part 1: https://drive.google.com/file/d/132hyg-dzEAWxYjtYIG2uEdFpWkgzuB2M/view?usp=sharing
+- part 2: https://drive.google.com/file/d/1JpWbNAd2ccOZrnz04y8mDGAK-TkWmib0/view?usp=sharing
+- part 3: https://drive.google.com/file/d/19JfWpXL6KL8Xq_tKGPln7LQL9xaur0MD/view?usp=sharing
 
 ## Group Info (#14)
 - s3734720 Shiyu Gao
